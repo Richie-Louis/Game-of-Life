@@ -45,6 +45,9 @@ namespace GOLStartUpTemplate
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.neighborCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeNeighborCountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.finiteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toroidalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -183,7 +186,10 @@ namespace GOLStartUpTemplate
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.neighborCountToolStripMenuItem,
-            this.removeNeighborCountToolStripMenuItem});
+            this.removeNeighborCountToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.finiteToolStripMenuItem1,
+            this.toroidalToolStripMenuItem});
             this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.viewToolStripMenuItem.Text = "Options";
@@ -201,6 +207,25 @@ namespace GOLStartUpTemplate
             this.removeNeighborCountToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.removeNeighborCountToolStripMenuItem.Text = "Remove Neighbor Count";
             this.removeNeighborCountToolStripMenuItem.Click += new System.EventHandler(this.removeNeighborCountToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(203, 6);
+            // 
+            // finiteToolStripMenuItem1
+            // 
+            this.finiteToolStripMenuItem1.Name = "finiteToolStripMenuItem1";
+            this.finiteToolStripMenuItem1.Size = new System.Drawing.Size(206, 22);
+            this.finiteToolStripMenuItem1.Text = "Finite";
+            this.finiteToolStripMenuItem1.Click += new System.EventHandler(this.finiteToolStripMenuItem1_Click);
+            // 
+            // toroidalToolStripMenuItem
+            // 
+            this.toroidalToolStripMenuItem.Name = "toroidalToolStripMenuItem";
+            this.toroidalToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.toroidalToolStripMenuItem.Text = "Toroidal";
+            this.toroidalToolStripMenuItem.Click += new System.EventHandler(this.toroidalToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -490,6 +515,9 @@ namespace GOLStartUpTemplate
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem neighborCountToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeNeighborCountToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem finiteToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toroidalToolStripMenuItem;
     }
 }
 
