@@ -104,8 +104,6 @@ namespace GOLStartUpTemplate
                     cellRect.Y = y * cellHeight;
                     cellRect.Width = cellWidth;
                     cellRect.Height = cellHeight;
-                    float a = cellRect.X;
-                    float b = cellRect.Y;
                     StringFormat format = new StringFormat();
                     format.Alignment = StringAlignment.Center;
                     format.LineAlignment = StringAlignment.Center;
@@ -118,9 +116,7 @@ namespace GOLStartUpTemplate
                     if (count > 0)
                     {
                         e.Graphics.DrawString($"{count}", font, brush, cellRect, format);
-
                     }
-
 
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
