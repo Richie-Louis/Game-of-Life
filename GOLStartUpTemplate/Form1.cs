@@ -13,7 +13,7 @@ namespace GOLStartUpTemplate
     public partial class Form1 : Form
     {
         // The universe array
-        bool[,] universe = new bool[5,5];
+        bool[,] universe = new bool[5, 5];
 
         // Drawing colors
         Color gridColor = Color.Red;
@@ -28,7 +28,7 @@ namespace GOLStartUpTemplate
         public Form1()
         {
             InitializeComponent();
-            
+
             // Setup the timer
             timer.Interval = 100; // milliseconds
             timer.Tick += Timer_Tick;
@@ -88,7 +88,7 @@ namespace GOLStartUpTemplate
             Brush cellBrush = new SolidBrush(cellColor);
 
             FontStyle fontStyle = FontStyle.Regular;
-            Font font = new Font(Font, fontStyle);
+            Font font = new Font("Arial Black", 20, fontStyle);
             Color color = Color.Red;
             Brush brush = new SolidBrush(color);
 
@@ -104,14 +104,23 @@ namespace GOLStartUpTemplate
                     cellRect.Y = y * cellHeight;
                     cellRect.Width = cellWidth;
                     cellRect.Height = cellHeight;
+                    float a = cellRect.X;
+                    float b = cellRect.Y;
+                    StringFormat format = new StringFormat();
+                    format.Alignment = StringAlignment.Center;
+                    format.LineAlignment = StringAlignment.Center;
                     // Fill the cell with a brush if alive
                     if (universe[x, y] == true)
                     {
                         e.Graphics.FillRectangle(cellBrush, cellRect);
                     }
                     int count = CountNeighborsFinite(x, y);
-                    
-                    e.Graphics.DrawString("T", font, brush, cellRect.X, cellRect.Y);
+                    if (count > 0)
+                    {
+                        e.Graphics.DrawString($"{count}", font, brush, cellRect, format);
+
+                    }
+
 
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
@@ -121,6 +130,8 @@ namespace GOLStartUpTemplate
             // Cleaning up pens and brushes
             gridPen.Dispose();
             cellBrush.Dispose();
+            brush.Dispose();
+            font.Dispose();
         }
 
         private void graphicsPanel1_MouseClick(object sender, MouseEventArgs e)
@@ -132,7 +143,7 @@ namespace GOLStartUpTemplate
                 // Calculate the width and height of each cell in pixels
                 int cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
                 int cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
-                
+
                 // Calculate the cell that was clicked in
                 // CELL X = MOUSE X / CELL WIDTH
                 int x = e.X / cellWidth;
@@ -204,7 +215,7 @@ namespace GOLStartUpTemplate
                         continue;
                     }
 
-                    if (universe[xCheck, yCheck] == true) count++;               
+                    if (universe[xCheck, yCheck] == true) count++;
                 }
             }
             return count;
@@ -243,7 +254,7 @@ namespace GOLStartUpTemplate
                 // Iterate through the universe in the x, left to right
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
-                    
+
                 }
             }
             graphicsPanel1.Invalidate();
@@ -251,8 +262,8 @@ namespace GOLStartUpTemplate
 
         private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-  
+
+
             graphicsPanel1.Invalidate();
         }
     }
