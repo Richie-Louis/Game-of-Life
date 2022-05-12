@@ -14,8 +14,7 @@ namespace GOLStartUpTemplate
     {
         int s = 2;
         // The universe array
-        bool[,] universe = new bool[10, 10];
-        bool[,] scratchpad = new bool[10, 10];
+        bool[,] universe = new bool[20, 20];
 
         // Drawing colors
         Color gridColor = Color.Red;
@@ -44,32 +43,33 @@ namespace GOLStartUpTemplate
         // Calculate the next generation of cells
         private void NextGeneration()
         {
-            //// nested for loop
-            //for (int y = 0; y < universe.GetLength(1); y++)
-            //{
-            //    // Iterate through the universe in the x, left to right
-            //    for (int x = 0; x < universe.GetLength(0); x++)
-            //    {
-            //        // int count = Count Neighbot
-            //        int count = CountNeighborsFinite(x, y);
-            //        // Apply rules
-            //        // Turn it on/off in the scratchPad
-            //        if (count < 2)
-            //        {
-            //            count = 0;
-            //            scratchpad[x, y] = true;
-            //        }
-            //        if (count > 3)
-            //        {
-            //            count = 0;
-            //            scratchpad[x, y] = true;
-            //        }
-            //        if (count == 2 || count == 3)
-            //        {
-            //            scratchpad[x,y] = true;
-            //        }
-            //    }
-            //}
+            bool[,] scratchpad = new bool[20, 20];
+            // nested for loop
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0); x++)
+                {
+                    // int count = Count Neighbot
+                    int count = CountNeighborsFinite(x, y);
+                    // Apply rules
+                    // Turn it on/off in the scratchPad
+                    if (count < 2)
+                    {
+                        count = 0;
+                        scratchpad[x, y] = true;
+                    }
+                    if (count > 3)
+                    {
+                        count = 0;
+                        scratchpad[x, y] = true;
+                    }
+                    if (count == 2 || count == 3)
+                    {
+                        scratchpad[x, y] = true;
+                    }
+                }
+            }
 
             ////// Copy from scratchPad to universe
             ////// Then clear scratchPad
@@ -97,9 +97,9 @@ namespace GOLStartUpTemplate
 
             // Calculate the width and height of each cell in pixels
             // CELL WIDTH = WINDOW WIDTH / NUMBER OF CELLS IN X
-            float cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
+            float cellWidth = (float)graphicsPanel1.ClientSize.Width / universe.GetLength(0);
             // CELL HEIGHT = WINDOW HEIGHT / NUMBER OF CELLS IN Y
-            float cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
+            float cellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1);
 
             // A Pen for drawing the grid lines (color, width)
             Pen gridPen = new Pen(gridColor, 1);
