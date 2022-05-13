@@ -14,7 +14,7 @@ namespace GOLStartUpTemplate
     {
         int s = 2;
         // The universe array
-        bool[,] universe = new bool[20, 20];
+        bool[,] universe = new bool[10, 10];
 
         // Drawing colors
         Color gridColor = Color.Red;
@@ -43,7 +43,7 @@ namespace GOLStartUpTemplate
         // Calculate the next generation of cells
         private void NextGeneration()
         {
-            bool[,] scratchpad = new bool[20, 20];
+            bool[,] scratchpad = new bool[10, 10];
             // nested for loop
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -51,29 +51,37 @@ namespace GOLStartUpTemplate
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
                     // int count = Count Neighbot
-                    int count = CountNeighborsFinite(x, y);
+                    int count = CountNeighborsToroidal(x, y);
                     // Apply rules
                     // Turn it on/off in the scratchPad
-                    if (count < 2)
+                    if (count > 0)
                     {
-                        count = 0;
-                        scratchpad[x, y] = true;
-                    }
-                    if (count > 3)
-                    {
-                        count = 0;
-                        scratchpad[x, y] = true;
-                    }
-                    if (count == 2 || count == 3)
-                    {
-                        scratchpad[x, y] = true;
+                        if (universe[x, y] == true && count < 2)
+                        {
+                            scratchpad[x, y] = false;
+                        }
+                        else if (universe[x, y] == true && count > 3)
+                        {
+                            scratchpad[x, y] = false;
+                        }
+                        else if (universe[x, y] == true && count == 2)
+                        {
+                            scratchpad[x, y] = true;
+                        }
+                        else if (universe[x, y] == true && count == 3)
+                        {
+                            scratchpad[x, y] = true;
+                        }
+                        else if (universe[x, y] == false && count == 3)
+                        {
+                            scratchpad[x, y] = true;
+                        }
                     }
                 }
             }
-
-            ////// Copy from scratchPad to universe
-            ////// Then clear scratchPad
-            //universe = scratchpad;
+            bool[,] temp = universe;
+            universe = scratchpad;
+            scratchpad = temp;
 
             // Increment generation count
             generations++;
@@ -138,7 +146,7 @@ namespace GOLStartUpTemplate
                     int toroidal = CountNeighborsToroidal(x, y);
                     if (count > 0)
                     {
-                    e.Graphics.DrawString($"{count}", font, brush, cellRect, format);
+                        e.Graphics.DrawString($"{count}", font, brush, cellRect, format);
                     }
 
                     if (s == 0)
