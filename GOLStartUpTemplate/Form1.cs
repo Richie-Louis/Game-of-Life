@@ -12,9 +12,9 @@ namespace GOLStartUpTemplate
 {
     public partial class Form1 : Form
     {
-        int s = 2;
+        int s = 0;
         // The universe array
-        bool[,] universe = new bool[10, 10];
+        bool[,] universe = new bool[20, 50];
 
         // Drawing colors
         Color gridColor = Color.Red;
@@ -43,40 +43,65 @@ namespace GOLStartUpTemplate
         // Calculate the next generation of cells
         private void NextGeneration()
         {
-            bool[,] scratchpad = new bool[10, 10];
-            // nested for loop
+            bool[,] scratchpad = new bool[20, 50];
             for (int y = 0; y < universe.GetLength(1); y++)
             {
-                // Iterate through the universe in the x, left to right
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
-                    // int count = Count Neighbot
-                    int count = CountNeighborsToroidal(x, y);
-                    // Apply rules
-                    // Turn it on/off in the scratchPad
-                    if (count > 0)
+                    if (s == 0)
                     {
-                        if (universe[x, y] == true && count < 2)
+                        int count = CountNeighborsFinite(x, y);
+                        if (count > 0)
                         {
-                            scratchpad[x, y] = false;
-                        }
-                        else if (universe[x, y] == true && count > 3)
-                        {
-                            scratchpad[x, y] = false;
-                        }
-                        else if (universe[x, y] == true && count == 2)
-                        {
-                            scratchpad[x, y] = true;
-                        }
-                        else if (universe[x, y] == true && count == 3)
-                        {
-                            scratchpad[x, y] = true;
-                        }
-                        else if (universe[x, y] == false && count == 3)
-                        {
-                            scratchpad[x, y] = true;
+                            if (universe[x, y] == true && count < 2)
+                            {
+                                scratchpad[x, y] = false;
+                            }
+                            else if (universe[x, y] == true && count > 3)
+                            {
+                                scratchpad[x, y] = false;
+                            }
+                            else if (universe[x, y] == true && count == 2)
+                            {
+                                scratchpad[x, y] = true;
+                            }
+                            else if (universe[x, y] == true && count == 3)
+                            {
+                                scratchpad[x, y] = true;
+                            }
+                            else if (universe[x, y] == false && count == 3)
+                            {
+                                scratchpad[x, y] = true;
+                            }
                         }
                     }
+                    if (s == 1)
+                    {
+                        int count = CountNeighborsToroidal(x, y);
+                        if (count > 0)
+                        {
+                            if (universe[x, y] == true && count < 2)
+                            {
+                                scratchpad[x, y] = false;
+                            }
+                            else if (universe[x, y] == true && count > 3)
+                            {
+                                scratchpad[x, y] = false;
+                            }
+                            else if (universe[x, y] == true && count == 2)
+                            {
+                                scratchpad[x, y] = true;
+                            }
+                            else if (universe[x, y] == true && count == 3)
+                            {
+                                scratchpad[x, y] = true;
+                            }
+                            else if (universe[x, y] == false && count == 3)
+                            {
+                                scratchpad[x, y] = true;
+                            }
+                        }
+                    }                  
                 }
             }
             bool[,] temp = universe;
@@ -116,7 +141,7 @@ namespace GOLStartUpTemplate
             Brush cellBrush = new SolidBrush(cellColor);
 
             FontStyle fontStyle = FontStyle.Regular;
-            Font font = new Font("Arial Black", 15, fontStyle);
+            Font font = new Font("Arial Black", 10, fontStyle);
 
 
             // Iterate through the universe in the y, top to bottom
@@ -144,10 +169,10 @@ namespace GOLStartUpTemplate
                     int finite = CountNeighborsFinite(x, y);
 
                     int toroidal = CountNeighborsToroidal(x, y);
-                    if (count > 0)
-                    {
-                        e.Graphics.DrawString($"{count}", font, brush, cellRect, format);
-                    }
+                    //if (count > 0)
+                    //{
+                    //    e.Graphics.DrawString($"{count}", font, brush, cellRect, format);
+                    //}
 
                     if (s == 0)
                     {
@@ -157,11 +182,6 @@ namespace GOLStartUpTemplate
                             e.Graphics.DrawString($"{finite}", font, brush, cellRect, format);
                         }
                     }
-                    //if (finite >= 2)
-                    //{
-                    //    brush = new SolidBrush(Color.Green);
-                    //    e.Graphics.DrawString($"{finite}", font, brush, cellRect, format);
-                    //}
                     if (s == 1)
                     {
                         if (toroidal > 0)
@@ -170,12 +190,10 @@ namespace GOLStartUpTemplate
                             //graphicsPanel1.Invalidate();
                         }
                     }
-
                     // Outline the cell with a pen
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                 }
             }
-
             // Cleaning up pens and brushes
             gridPen.Dispose();
             cellBrush.Dispose();
@@ -190,17 +208,17 @@ namespace GOLStartUpTemplate
             {
                 //Floats
                 // Calculate the width and height of each cell in pixels
-                int cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
-                int cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
+                float cellWidth = (float)graphicsPanel1.ClientSize.Width / universe.GetLength(0);
+                float cellHeight = (float)graphicsPanel1.ClientSize.Height / universe.GetLength(1);
 
                 // Calculate the cell that was clicked in
                 // CELL X = MOUSE X / CELL WIDTH
-                int x = e.X / cellWidth;
+                float x = e.X / cellWidth;
                 // CELL Y = MOUSE Y / CELL HEIGHT
-                int y = e.Y / cellHeight;
+                float y = e.Y / cellHeight;
 
                 // Toggle the cell's state
-                universe[x, y] = !universe[x, y];
+                universe[(int)x, (int)y] = !universe[(int)x, (int)y];
 
                 // Tell Windows you need to repaint
                 graphicsPanel1.Invalidate();
@@ -263,7 +281,6 @@ namespace GOLStartUpTemplate
                     {
                         continue;
                     }
-
                     if (universe[xCheck, yCheck] == true) count++;
                 }
             }
@@ -341,19 +358,6 @@ namespace GOLStartUpTemplate
             graphicsPanel1.Invalidate();
         }
 
-        private void finiteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            for (int y = 0; y < universe.GetLength(1); y++)
-            {
-                // Iterate through the universe in the x, left to right
-                for (int x = 0; x < universe.GetLength(0); x++)
-                {
-
-                }
-            }
-            graphicsPanel1.Invalidate();
-        }
-
         private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             brush = new SolidBrush(Color.Red);
@@ -377,5 +381,6 @@ namespace GOLStartUpTemplate
             s = 1;
             graphicsPanel1.Invalidate();
         }
+
     }
 }
