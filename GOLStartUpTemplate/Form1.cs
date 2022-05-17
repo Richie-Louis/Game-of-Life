@@ -18,7 +18,7 @@ namespace GOLStartUpTemplate
         bool[,] universe = new bool[20, 20];
 
         // Color
-        //int number = 10;
+        int number = 10;
         Color numColor = Color.Red;
 
         // Drawing colors
@@ -133,9 +133,9 @@ namespace GOLStartUpTemplate
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
             brush = new SolidBrush(numColor);
-            //Brush numBrush = new SolidBrush(numColor);
-            //e.Graphics.DrawString(number.ToString(), graphicsPanel1.Font, numBrush, new PointF(0, 0));
-            //brush.Dispose();
+            Brush numBrush = new SolidBrush(numColor);
+            e.Graphics.DrawString(number.ToString(), graphicsPanel1.Font, numBrush, new PointF(0, 0));
+            numBrush.Dispose();
 
             // Use float to make window precise
 
@@ -393,7 +393,56 @@ namespace GOLStartUpTemplate
             graphicsPanel1.Invalidate();
         }
 
-        private void color_Click(object sender, EventArgs e)
+        private void view_Click(object sender, EventArgs e)
+        {
+            ViewDialog dlg = new ViewDialog();
+
+            //dlg.SetNumber(number);
+
+            dlg.Number = number;
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                //number = dlg.GetNumber();
+                number = dlg.Number;
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void gridColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = gridColor;
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                gridColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void cellColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = cellColor;
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                cellColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void backColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = graphicsPanel1.BackColor;
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                graphicsPanel1.BackColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void countColor_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
             dlg.Color = numColor;
@@ -402,11 +451,6 @@ namespace GOLStartUpTemplate
                 numColor = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
-        }
-
-        private void view_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
