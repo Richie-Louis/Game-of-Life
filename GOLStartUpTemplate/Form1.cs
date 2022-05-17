@@ -11,10 +11,15 @@ using System.Windows.Forms;
 namespace GOLStartUpTemplate
 {
     public partial class Form1 : Form
-    {
+    {   // Global variable for finite or toriodal view
         int s = 0;
+
         // The universe array
-        bool[,] universe = new bool[20, 50];
+        bool[,] universe = new bool[20, 20];
+
+        // Color
+        //int number = 10;
+        Color numColor = Color.Red;
 
         // Drawing colors
         Color gridColor = Color.Red;
@@ -22,7 +27,7 @@ namespace GOLStartUpTemplate
 
         // Global Variable
         //Color color = Color.Red;
-        Brush brush = new SolidBrush(Color.Red);
+        Brush brush;// = new SolidBrush(Color.Red);
 
         // The Timer class
         Timer timer = new Timer();
@@ -43,7 +48,8 @@ namespace GOLStartUpTemplate
         // Calculate the next generation of cells
         private void NextGeneration()
         {
-            bool[,] scratchpad = new bool[20, 50];
+            // The scratchpad array
+            bool[,] scratchpad = new bool[20, 20];
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
@@ -126,6 +132,11 @@ namespace GOLStartUpTemplate
 
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
+            brush = new SolidBrush(numColor);
+            //Brush numBrush = new SolidBrush(numColor);
+            //e.Graphics.DrawString(number.ToString(), graphicsPanel1.Font, numBrush, new PointF(0, 0));
+            //brush.Dispose();
+
             // Use float to make window precise
 
             // Calculate the width and height of each cell in pixels
@@ -225,7 +236,7 @@ namespace GOLStartUpTemplate
             }
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Exit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -332,7 +343,7 @@ namespace GOLStartUpTemplate
             }
             return count;
         }
-        private void newToolStripButton_Click(object sender, EventArgs e)
+        private void newfile_Click(object sender, EventArgs e)
         {
             float cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
             float cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
@@ -358,29 +369,44 @@ namespace GOLStartUpTemplate
             graphicsPanel1.Invalidate();
         }
 
-        private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
+        private void neighborCount_Click(object sender, EventArgs e)
         {
             brush = new SolidBrush(Color.Red);
             graphicsPanel1.Invalidate();
         }
 
-        private void removeNeighborCountToolStripMenuItem_Click(object sender, EventArgs e)
+        private void removeNeighborCount_Click(object sender, EventArgs e)
         {
             brush = new SolidBrush(Color.Transparent);
             graphicsPanel1.Invalidate();
         }
 
-        private void finiteToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void finiteview_Click(object sender, EventArgs e)
         {
             s = 0;
             graphicsPanel1.Invalidate();
         }
 
-        private void toroidalToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toroidalview_Click(object sender, EventArgs e)
         {
             s = 1;
             graphicsPanel1.Invalidate();
         }
 
+        private void color_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = numColor;
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                numColor = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void view_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
