@@ -215,6 +215,7 @@ namespace GOLStartUpTemplate
             // finiteview
             // 
             this.finiteview.Checked = true;
+            this.finiteview.CheckOnClick = true;
             this.finiteview.CheckState = System.Windows.Forms.CheckState.Checked;
             this.finiteview.Name = "finiteview";
             this.finiteview.Size = new System.Drawing.Size(206, 22);
@@ -288,7 +289,7 @@ namespace GOLStartUpTemplate
             // countColorToolStripMenuItem
             // 
             this.countColorToolStripMenuItem.Name = "countColorToolStripMenuItem";
-            this.countColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.countColorToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.countColorToolStripMenuItem.Text = "Count Color";
             this.countColorToolStripMenuItem.Click += new System.EventHandler(this.countColor_Click);
             // 
@@ -442,41 +443,41 @@ namespace GOLStartUpTemplate
             this.countColorToolStripMenuItem1,
             this.gridColorToolStripMenuItem1});
             this.color.Name = "color";
-            this.color.Size = new System.Drawing.Size(180, 22);
+            this.color.Size = new System.Drawing.Size(103, 22);
             this.color.Text = "Color";
             // 
             // backColorToolStripMenuItem1
             // 
             this.backColorToolStripMenuItem1.Name = "backColorToolStripMenuItem1";
-            this.backColorToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.backColorToolStripMenuItem1.Size = new System.Drawing.Size(139, 22);
             this.backColorToolStripMenuItem1.Text = "Back Color";
             this.backColorToolStripMenuItem1.Click += new System.EventHandler(this.backColor_Click);
             // 
             // cellColorToolStripMenuItem1
             // 
             this.cellColorToolStripMenuItem1.Name = "cellColorToolStripMenuItem1";
-            this.cellColorToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.cellColorToolStripMenuItem1.Size = new System.Drawing.Size(139, 22);
             this.cellColorToolStripMenuItem1.Text = "Cell Color";
             this.cellColorToolStripMenuItem1.Click += new System.EventHandler(this.cellColor_Click);
             // 
             // countColorToolStripMenuItem1
             // 
             this.countColorToolStripMenuItem1.Name = "countColorToolStripMenuItem1";
-            this.countColorToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.countColorToolStripMenuItem1.Size = new System.Drawing.Size(139, 22);
             this.countColorToolStripMenuItem1.Text = "Count Color";
             this.countColorToolStripMenuItem1.Click += new System.EventHandler(this.countColor_Click);
             // 
             // gridColorToolStripMenuItem1
             // 
             this.gridColorToolStripMenuItem1.Name = "gridColorToolStripMenuItem1";
-            this.gridColorToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.gridColorToolStripMenuItem1.Size = new System.Drawing.Size(139, 22);
             this.gridColorToolStripMenuItem1.Text = "Grid Color";
             this.gridColorToolStripMenuItem1.Click += new System.EventHandler(this.gridColor_Click);
             // 
             // view
             // 
             this.view.Name = "view";
-            this.view.Size = new System.Drawing.Size(180, 22);
+            this.view.Size = new System.Drawing.Size(103, 22);
             this.view.Text = "View";
             this.view.Click += new System.EventHandler(this.view_Click);
             // 

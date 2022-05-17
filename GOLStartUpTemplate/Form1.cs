@@ -384,12 +384,28 @@ namespace GOLStartUpTemplate
         private void finiteview_Click(object sender, EventArgs e)
         {
             s = 0;
+            if (finiteview.Checked == true)
+            {
+                toroidalview.Checked = false;
+            }
+            //else
+            //{
+            //    toroidalview.Checked = true;
+            //}
             graphicsPanel1.Invalidate();
         }
 
         private void toroidalview_Click(object sender, EventArgs e)
         {
             s = 1;
+            if (toroidalview.Checked == true)
+            {
+                finiteview.Checked = false;
+            }
+            //else
+            //{
+            //    finiteview.Checked = true;
+            //}
             graphicsPanel1.Invalidate();
         }
 
