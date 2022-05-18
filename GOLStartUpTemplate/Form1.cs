@@ -18,12 +18,14 @@ namespace GOLStartUpTemplate
         bool[,] universe = new bool[20, 20];
 
         // Color
-        int number = 10;
+        //int number = 10;
         Color numColor = Color.Red;
+        Color numColor2 = Color.Red;
 
         // Drawing colors
         Color gridColor = Color.Red;
         Color cellColor = Color.Aqua;
+        Color temp = Color.Red;
 
         // Global Variable
         //Color color = Color.Red;
@@ -371,20 +373,13 @@ namespace GOLStartUpTemplate
 
         private void viewNeighborCount_Click(object sender, EventArgs e)
         {
-            brush = new SolidBrush(Color.Red);
             if (viewNeighborCount.Checked == true)
             {
-                removeNeighborCount.Checked = false;
+                brush = new SolidBrush(numColor2);
             }
-            graphicsPanel1.Invalidate();
-        }
-
-        private void removeNeighborCount_Click(object sender, EventArgs e)
-        {
-            brush = new SolidBrush(Color.Transparent);
-            if (removeNeighborCount.Checked == true)
+            else
             {
-                viewNeighborCount.Checked = false;
+                brush = new SolidBrush(Color.Empty);
             }
             graphicsPanel1.Invalidate();
         }
@@ -417,32 +412,34 @@ namespace GOLStartUpTemplate
             graphicsPanel1.Invalidate();
         }
 
-        private void view_Click(object sender, EventArgs e)
-        {
-            ViewDialog dlg = new ViewDialog();
+        //private void view_Click(object sender, EventArgs e)
+        //{
+        //    ViewDialog dlg = new ViewDialog();
 
-            //dlg.SetNumber(number);
+        //    //dlg.SetNumber(number);
 
-            dlg.Number = number;
+        //    dlg.Number = number;
 
-            if (DialogResult.OK == dlg.ShowDialog())
-            {
-                //number = dlg.GetNumber();
-                number = dlg.Number;
-                graphicsPanel1.Invalidate();
-            }
-        }
+        //    if (DialogResult.OK == dlg.ShowDialog())
+        //    {
+        //        //number = dlg.GetNumber();
+        //        number = dlg.Number;
+        //        graphicsPanel1.Invalidate();
+        //    }
+        //}
 
         private void gridColor_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
             dlg.Color = gridColor;
             if (DialogResult.OK == dlg.ShowDialog())
-            {
+            {               
                 gridColor = dlg.Color;
+                temp = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
         }
+            
 
         private void cellColor_Click(object sender, EventArgs e)
         {
@@ -473,9 +470,40 @@ namespace GOLStartUpTemplate
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 numColor = dlg.Color;
+                numColor2 = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
             brush = new SolidBrush(numColor);
+        }
+
+        private void gridView_Click(object sender, EventArgs e)
+        {
+            //ColorDialog dlg = new ColorDialog();
+            //dlg.Color = gridColor;
+            //if (DialogResult.OK == dlg.ShowDialog())
+            //{
+            //    gridColor = dlg.Color;
+            //    graphicsPanel1.Invalidate();
+            //}
+            //if (gridView.Checked == true)
+            //{
+            //    gridColor = ncolor;
+
+
+            ////    gridColorToolStripMenuItem.Enabled = false;
+            ////    gridColorToolStripMenuItem1.Enabled = false;
+            //}
+
+            if (gridView.Checked == false)
+            {
+                gridColor = Color.Empty;
+            }
+            else
+            {
+                gridColor = temp;
+            }
+
+            graphicsPanel1.Invalidate();            
         }
     }
 }
