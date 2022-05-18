@@ -27,7 +27,7 @@ namespace GOLStartUpTemplate
 
         // Global Variable
         //Color color = Color.Red;
-        Brush brush;// = new SolidBrush(Color.Red);
+        Brush brush = new SolidBrush(Color.Red);
 
         // The Timer class
         Timer timer = new Timer();
@@ -132,10 +132,10 @@ namespace GOLStartUpTemplate
 
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
-            brush = new SolidBrush(numColor);
-            Brush numBrush = new SolidBrush(numColor);
-            e.Graphics.DrawString(number.ToString(), graphicsPanel1.Font, numBrush, new PointF(0, 0));
-            numBrush.Dispose();
+            //brush = new SolidBrush(numColor);
+            //Brush numBrush = new SolidBrush(numColor);
+            //e.Graphics.DrawString(number.ToString(), graphicsPanel1.Font, numBrush, new PointF(0, 0));
+            //numBrush.Dispose();
 
             // Use float to make window precise
 
@@ -369,15 +369,23 @@ namespace GOLStartUpTemplate
             graphicsPanel1.Invalidate();
         }
 
-        private void neighborCount_Click(object sender, EventArgs e)
+        private void viewNeighborCount_Click(object sender, EventArgs e)
         {
             brush = new SolidBrush(Color.Red);
+            if (viewNeighborCount.Checked == true)
+            {
+                removeNeighborCount.Checked = false;
+            }
             graphicsPanel1.Invalidate();
         }
 
         private void removeNeighborCount_Click(object sender, EventArgs e)
         {
             brush = new SolidBrush(Color.Transparent);
+            if (removeNeighborCount.Checked == true)
+            {
+                viewNeighborCount.Checked = false;
+            }
             graphicsPanel1.Invalidate();
         }
 
@@ -467,6 +475,7 @@ namespace GOLStartUpTemplate
                 numColor = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
+            brush = new SolidBrush(numColor);
         }
     }
 }

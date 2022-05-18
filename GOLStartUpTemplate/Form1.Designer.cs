@@ -43,7 +43,7 @@ namespace GOLStartUpTemplate
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neighborCount = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewNeighborCount = new System.Windows.Forms.ToolStripMenuItem();
             this.removeNeighborCount = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.finiteview = new System.Windows.Forms.ToolStripMenuItem();
@@ -120,7 +120,7 @@ namespace GOLStartUpTemplate
             this.newfile.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newfile.Name = "newfile";
             this.newfile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newfile.Size = new System.Drawing.Size(146, 22);
+            this.newfile.Size = new System.Drawing.Size(180, 22);
             this.newfile.Text = "&New";
             this.newfile.Click += new System.EventHandler(this.newfile_Click);
             // 
@@ -130,13 +130,13 @@ namespace GOLStartUpTemplate
             this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "&Open";
             // 
             // toolStripSeparator
             // 
             this.toolStripSeparator.Name = "toolStripSeparator";
-            this.toolStripSeparator.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
             // 
             // saveToolStripMenuItem
             // 
@@ -144,13 +144,13 @@ namespace GOLStartUpTemplate
             this.saveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // printToolStripMenuItem
             // 
@@ -158,7 +158,7 @@ namespace GOLStartUpTemplate
             this.printToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printToolStripMenuItem.Name = "printToolStripMenuItem";
             this.printToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
-            this.printToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.printToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.printToolStripMenuItem.Text = "&Print";
             // 
             // printPreviewToolStripMenuItem
@@ -166,25 +166,25 @@ namespace GOLStartUpTemplate
             this.printPreviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("printPreviewToolStripMenuItem.Image")));
             this.printPreviewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.printPreviewToolStripMenuItem.Name = "printPreviewToolStripMenuItem";
-            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.printPreviewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.printPreviewToolStripMenuItem.Text = "Print Pre&view";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(143, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // Exit
             // 
             this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(146, 22);
+            this.Exit.Size = new System.Drawing.Size(180, 22);
             this.Exit.Text = "E&xit";
             this.Exit.Click += new System.EventHandler(this.Exit_Click);
             // 
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.neighborCount,
+            this.viewNeighborCount,
             this.removeNeighborCount,
             this.toolStripSeparator3,
             this.finiteview,
@@ -193,15 +193,19 @@ namespace GOLStartUpTemplate
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.viewToolStripMenuItem.Text = "&Options";
             // 
-            // neighborCount
+            // viewNeighborCount
             // 
-            this.neighborCount.Name = "neighborCount";
-            this.neighborCount.Size = new System.Drawing.Size(206, 22);
-            this.neighborCount.Text = "View Neighbor Count";
-            this.neighborCount.Click += new System.EventHandler(this.neighborCount_Click);
+            this.viewNeighborCount.Checked = true;
+            this.viewNeighborCount.CheckOnClick = true;
+            this.viewNeighborCount.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.viewNeighborCount.Name = "viewNeighborCount";
+            this.viewNeighborCount.Size = new System.Drawing.Size(206, 22);
+            this.viewNeighborCount.Text = "View Neighbor Count";
+            this.viewNeighborCount.Click += new System.EventHandler(this.viewNeighborCount_Click);
             // 
             // removeNeighborCount
             // 
+            this.removeNeighborCount.CheckOnClick = true;
             this.removeNeighborCount.Name = "removeNeighborCount";
             this.removeNeighborCount.Size = new System.Drawing.Size(206, 22);
             this.removeNeighborCount.Text = "Remove Neighbor Count";
@@ -535,7 +539,7 @@ namespace GOLStartUpTemplate
         private System.Windows.Forms.ToolStripButton Pause;
         private System.Windows.Forms.ToolStripButton Next;
         private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neighborCount;
+        private System.Windows.Forms.ToolStripMenuItem viewNeighborCount;
         private System.Windows.Forms.ToolStripMenuItem removeNeighborCount;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem toroidalview;
