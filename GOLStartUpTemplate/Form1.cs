@@ -490,17 +490,19 @@ namespace GOLStartUpTemplate
             //    gridColor = ncolor;
 
 
-            ////    gridColorToolStripMenuItem.Enabled = false;
-            ////    gridColorToolStripMenuItem1.Enabled = false;
             //}
 
             if (gridView.Checked == false)
             {
                 gridColor = Color.Empty;
+                gridColorToolStripMenuItem.Enabled = false;
+                gridColorToolStripMenuItem1.Enabled = false;
             }
             else
             {
                 gridColor = temp;
+                gridColorToolStripMenuItem.Enabled = true;
+                gridColorToolStripMenuItem1.Enabled = true;
             }
 
             graphicsPanel1.Invalidate();            
