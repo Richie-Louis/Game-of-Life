@@ -507,5 +507,23 @@ namespace GOLStartUpTemplate
 
             graphicsPanel1.Invalidate();            
         }
+
+        private void fromSeedRandomize_Click(object sender, EventArgs e)
+        {
+            FromSeedDialog dlg = new FromSeedDialog();
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                graphicsPanel1.Invalidate();
+            }
+        }
+
+        private void optionsSettings_Click(object sender, EventArgs e)
+        {
+            OptionsSettingsDialog dlg = new OptionsSettingsDialog();
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                graphicsPanel1.Invalidate();
+            }
+        }
     }
 }

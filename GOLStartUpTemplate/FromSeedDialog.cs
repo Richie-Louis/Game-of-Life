@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GOLStartUpTemplate
 {
-    public partial class ViewDialog : Form
+    public partial class FromSeedDialog : Form
     {
-        public ViewDialog()
+        public FromSeedDialog()
         {
             InitializeComponent();
         }
