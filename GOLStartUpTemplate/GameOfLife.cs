@@ -384,13 +384,13 @@ namespace GOLStartUpTemplate
 
         private void viewNeighborCount_Click(object sender, EventArgs e)
         {
-            if (viewNeighborCount.Checked == true)
+            if (viewNeighborCount.Checked != true)
             {
-                brush = new SolidBrush(countColor2);
+                countColor = Color.Empty;
             }
             else
             {
-                brush = new SolidBrush(Color.Empty);
+                countColor = countColor2;
             }
             graphicsPanel1.Invalidate();
         }
@@ -460,7 +460,7 @@ namespace GOLStartUpTemplate
                 countColor2 = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
-            brush = new SolidBrush(countColor);
+            //brush = new SolidBrush(countColor);
         }
 
         private void gridView_Click(object sender, EventArgs e)
