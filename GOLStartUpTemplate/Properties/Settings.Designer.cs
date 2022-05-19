@@ -70,5 +70,41 @@ namespace GOLStartUpTemplate.Properties {
                 this["GridColor"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int CellWidthCount {
+            get {
+                return ((int)(this["CellWidthCount"]));
+            }
+            set {
+                this["CellWidthCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int CellHeightCount {
+            get {
+                return ((int)(this["CellHeightCount"]));
+            }
+            set {
+                this["CellHeightCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int TimerInterval {
+            get {
+                return ((int)(this["TimerInterval"]));
+            }
+            set {
+                this["TimerInterval"] = value;
+            }
+        }
     }
 }

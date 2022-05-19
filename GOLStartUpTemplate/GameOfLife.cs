@@ -15,9 +15,9 @@ namespace GOLStartUpTemplate
         int s = 0;
 
         // The universe array
-        bool[,] universe = new bool[20, 20];
-        int xa = 20;
-        int ya = 20;
+        bool[,] universe = new bool[Properties.Settings.Default.CellWidthCount, Properties.Settings.Default.CellHeightCount];        
+        int xa;
+        int ya;
 
         // Color
         //int number = 10;
@@ -49,8 +49,11 @@ namespace GOLStartUpTemplate
             countColor2 = Properties.Settings.Default.CountColor;
             gridColor = Properties.Settings.Default.GridColor;
             cellColor = Properties.Settings.Default.CellColor;
+            xa = Properties.Settings.Default.CellWidthCount;
+            ya = Properties.Settings.Default.CellHeightCount;
             // Setup the timer
-            timer.Interval = 100; // milliseconds
+            timer.Interval = Properties.Settings.Default.TimerInterval;
+            //timer.Interval = 100; // milliseconds
             timer.Tick += Timer_Tick;
             timer.Enabled = false; // start timer running
         }
@@ -143,7 +146,6 @@ namespace GOLStartUpTemplate
 
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
-            //universe = new bool[xa, ya];
             brush = new SolidBrush(countColor);
             //Brush numBrush = new SolidBrush(numColor);
             //e.Graphics.DrawString(number.ToString(), graphicsPanel1.Font, numBrush, new PointF(0, 0));
@@ -217,6 +219,9 @@ namespace GOLStartUpTemplate
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                 }
             }
+                    //universe = new bool[xa, ya];
+                    //graphicsPanel1.Invalidate();
+            
             // Cleaning up pens and brushes
             gridPen.Dispose();
             cellBrush.Dispose();
@@ -460,7 +465,6 @@ namespace GOLStartUpTemplate
                 countColor2 = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
-            //brush = new SolidBrush(countColor);
         }
 
         private void gridView_Click(object sender, EventArgs e)
@@ -492,11 +496,17 @@ namespace GOLStartUpTemplate
 
         private void optionsSettings_Click(object sender, EventArgs e)
         {
+           
             OptionsSettingsDialog dlg = new OptionsSettingsDialog();
             dlg.Width = xa;
             dlg.Height = ya;
+            dlg.Timer = timer.Interval;
             if (DialogResult.OK == dlg.ShowDialog())
             {
+                xa = dlg.Width;
+                ya = dlg.Height;
+                timer.Interval = dlg.Timer;
+                universe = new bool[xa, ya];
                 graphicsPanel1.Invalidate();
             }
         }
@@ -509,6 +519,9 @@ namespace GOLStartUpTemplate
             Properties.Settings.Default.CountColor = countColor2;
             Properties.Settings.Default.GridColor = gridColor;
             Properties.Settings.Default.CellColor = cellColor;
+            Properties.Settings.Default.CellWidthCount = xa;
+            Properties.Settings.Default.CellHeightCount = ya;
+            Properties.Settings.Default.TimerInterval = timer.Interval;
             Properties.Settings.Default.Save();
         }
 
@@ -521,6 +534,9 @@ namespace GOLStartUpTemplate
             countColor2 = Properties.Settings.Default.CountColor;
             gridColor = Properties.Settings.Default.GridColor;
             cellColor = Properties.Settings.Default.CellColor;
+            xa = Properties.Settings.Default.CellWidthCount;
+            ya = Properties.Settings.Default.CellHeightCount;
+            timer.Interval = Properties.Settings.Default.TimerInterval;
         }
 
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -532,6 +548,9 @@ namespace GOLStartUpTemplate
             countColor2 = Properties.Settings.Default.CountColor;
             gridColor = Properties.Settings.Default.GridColor;
             cellColor = Properties.Settings.Default.CellColor;
+            xa = Properties.Settings.Default.CellWidthCount;
+            ya = Properties.Settings.Default.CellHeightCount;
+            timer.Interval = Properties.Settings.Default.TimerInterval;
         }
     }
 }

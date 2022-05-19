@@ -28,5 +28,11 @@ namespace GOLStartUpTemplate
             get { return (int)heightNumeric.Value; }
             set { heightNumeric.Value = value; }
         }
+
+        public int Timer
+        {
+            get { return (int)timeNumeric.Value; }
+            set { timeNumeric.Value = value; }
+        }
     }
 }
