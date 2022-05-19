@@ -10,26 +10,28 @@ using System.Windows.Forms;
 
 namespace GOLStartUpTemplate
 {
-    public partial class Form1 : Form
+    public partial class GameOfLife : Form
     {   // Global variable for finite or toriodal view
         int s = 0;
 
         // The universe array
         bool[,] universe = new bool[20, 20];
+        int xa = 20;
+        int ya = 20;
 
         // Color
         //int number = 10;
-        Color numColor = Color.Red;
-        Color numColor2 = Color.Red;
+        Color countColor;// = Color.White;
+        Color countColor2;// = Color.White;
 
         // Drawing colors
-        Color gridColor = Color.Red;
-        Color cellColor = Color.Aqua;
+        Color gridColor;// = Color.Red;
+        Color cellColor;// = Color.AntiqueWhite;
         Color temp = Color.Red;
 
         // Global Variable
         //Color color = Color.Red;
-        Brush brush = new SolidBrush(Color.Red);
+        Brush brush;// = new SolidBrush(Color.Red);
 
         // The Timer class
         Timer timer = new Timer();
@@ -37,10 +39,16 @@ namespace GOLStartUpTemplate
         // Generation count
         int generations = 0;
 
-        public Form1()
+        public GameOfLife()
         {
             InitializeComponent();
 
+            // Reading the property
+            graphicsPanel1.BackColor = Properties.Settings.Default.PanelColor;
+            countColor = Properties.Settings.Default.CountColor;
+            countColor2 = Properties.Settings.Default.CountColor;
+            gridColor = Properties.Settings.Default.GridColor;
+            cellColor = Properties.Settings.Default.CellColor;
             // Setup the timer
             timer.Interval = 100; // milliseconds
             timer.Tick += Timer_Tick;
@@ -50,8 +58,9 @@ namespace GOLStartUpTemplate
         // Calculate the next generation of cells
         private void NextGeneration()
         {
+            //universe = new bool[xa, ya];
             // The scratchpad array
-            bool[,] scratchpad = new bool[20, 20];
+            bool[,] scratchpad = new bool[xa, ya];
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
@@ -134,7 +143,8 @@ namespace GOLStartUpTemplate
 
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
-            //brush = new SolidBrush(numColor);
+            //universe = new bool[xa, ya];
+            brush = new SolidBrush(countColor);
             //Brush numBrush = new SolidBrush(numColor);
             //e.Graphics.DrawString(number.ToString(), graphicsPanel1.Font, numBrush, new PointF(0, 0));
             //numBrush.Dispose();
@@ -219,6 +229,7 @@ namespace GOLStartUpTemplate
             // If the left mouse button was clicked
             if (e.Button == MouseButtons.Left)
             {
+                //universe = new bool[xa, ya];
                 //Floats
                 // Calculate the width and height of each cell in pixels
                 float cellWidth = (float)graphicsPanel1.ClientSize.Width / universe.GetLength(0);
@@ -375,7 +386,7 @@ namespace GOLStartUpTemplate
         {
             if (viewNeighborCount.Checked == true)
             {
-                brush = new SolidBrush(numColor2);
+                brush = new SolidBrush(countColor2);
             }
             else
             {
@@ -391,10 +402,6 @@ namespace GOLStartUpTemplate
             {
                 toroidalview.Checked = false;
             }
-            //else
-            //{
-            //    toroidalview.Checked = true;
-            //}
             graphicsPanel1.Invalidate();
         }
 
@@ -405,28 +412,8 @@ namespace GOLStartUpTemplate
             {
                 finiteview.Checked = false;
             }
-            //else
-            //{
-            //    finiteview.Checked = true;
-            //}
             graphicsPanel1.Invalidate();
         }
-
-        //private void view_Click(object sender, EventArgs e)
-        //{
-        //    ViewDialog dlg = new ViewDialog();
-
-        //    //dlg.SetNumber(number);
-
-        //    dlg.Number = number;
-
-        //    if (DialogResult.OK == dlg.ShowDialog())
-        //    {
-        //        //number = dlg.GetNumber();
-        //        number = dlg.Number;
-        //        graphicsPanel1.Invalidate();
-        //    }
-        //}
 
         private void gridColor_Click(object sender, EventArgs e)
         {
@@ -466,32 +453,18 @@ namespace GOLStartUpTemplate
         private void countColor_Click(object sender, EventArgs e)
         {
             ColorDialog dlg = new ColorDialog();
-            dlg.Color = numColor;
+            dlg.Color = countColor;
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                numColor = dlg.Color;
-                numColor2 = dlg.Color;
+                countColor = dlg.Color;
+                countColor2 = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
-            brush = new SolidBrush(numColor);
+            brush = new SolidBrush(countColor);
         }
 
         private void gridView_Click(object sender, EventArgs e)
         {
-            //ColorDialog dlg = new ColorDialog();
-            //dlg.Color = gridColor;
-            //if (DialogResult.OK == dlg.ShowDialog())
-            //{
-            //    gridColor = dlg.Color;
-            //    graphicsPanel1.Invalidate();
-            //}
-            //if (gridView.Checked == true)
-            //{
-            //    gridColor = ncolor;
-
-
-            //}
-
             if (gridView.Checked == false)
             {
                 gridColor = Color.Empty;
@@ -520,10 +493,45 @@ namespace GOLStartUpTemplate
         private void optionsSettings_Click(object sender, EventArgs e)
         {
             OptionsSettingsDialog dlg = new OptionsSettingsDialog();
+            dlg.Width = xa;
+            dlg.Height = ya;
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 graphicsPanel1.Invalidate();
             }
+        }
+
+        private void GameOfLife_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // Updating the property
+            Properties.Settings.Default.PanelColor = graphicsPanel1.BackColor;
+            Properties.Settings.Default.CountColor = countColor;
+            Properties.Settings.Default.CountColor = countColor2;
+            Properties.Settings.Default.GridColor = gridColor;
+            Properties.Settings.Default.CellColor = cellColor;
+            Properties.Settings.Default.Save();
+        }
+
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Reseting the property
+            Properties.Settings.Default.Reset();
+            graphicsPanel1.BackColor = Properties.Settings.Default.PanelColor;
+            countColor = Properties.Settings.Default.CountColor;
+            countColor2 = Properties.Settings.Default.CountColor;
+            gridColor = Properties.Settings.Default.GridColor;
+            cellColor = Properties.Settings.Default.CellColor;
+        }
+
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Reloading the property
+            Properties.Settings.Default.Reload();
+            graphicsPanel1.BackColor = Properties.Settings.Default.PanelColor;
+            countColor = Properties.Settings.Default.CountColor;
+            countColor2 = Properties.Settings.Default.CountColor;
+            gridColor = Properties.Settings.Default.GridColor;
+            cellColor = Properties.Settings.Default.CellColor;
         }
     }
 }

@@ -29,70 +29,70 @@ namespace GOLStartUpTemplate
         /// </summary>
         private void InitializeComponent()
         {
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.timeNumeric = new System.Windows.Forms.NumericUpDown();
+            this.widthNumeric = new System.Windows.Forms.NumericUpDown();
+            this.heightNumeric = new System.Windows.Forms.NumericUpDown();
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timeNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heightNumeric)).BeginInit();
             this.SuspendLayout();
             // 
-            // numericUpDown1
+            // timeNumeric
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(208, 38);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
+            this.timeNumeric.Location = new System.Drawing.Point(208, 38);
+            this.timeNumeric.Maximum = new decimal(new int[] {
             10000000,
             0,
             0,
             0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.timeNumeric.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(60, 20);
-            this.numericUpDown1.TabIndex = 3;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.timeNumeric.Name = "timeNumeric";
+            this.timeNumeric.Size = new System.Drawing.Size(60, 20);
+            this.timeNumeric.TabIndex = 3;
+            this.timeNumeric.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
             // 
-            // numericUpDown2
+            // widthNumeric
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(208, 73);
-            this.numericUpDown2.Minimum = new decimal(new int[] {
+            this.widthNumeric.Location = new System.Drawing.Point(208, 73);
+            this.widthNumeric.Minimum = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(60, 20);
-            this.numericUpDown2.TabIndex = 4;
-            this.numericUpDown2.Value = new decimal(new int[] {
+            this.widthNumeric.Name = "widthNumeric";
+            this.widthNumeric.Size = new System.Drawing.Size(60, 20);
+            this.widthNumeric.TabIndex = 4;
+            this.widthNumeric.Value = new decimal(new int[] {
             5,
             0,
             0,
             0});
             // 
-            // numericUpDown3
+            // heightNumeric
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(208, 110);
-            this.numericUpDown3.Minimum = new decimal(new int[] {
+            this.heightNumeric.Location = new System.Drawing.Point(208, 110);
+            this.heightNumeric.Minimum = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(60, 20);
-            this.numericUpDown3.TabIndex = 5;
-            this.numericUpDown3.Value = new decimal(new int[] {
+            this.heightNumeric.Name = "heightNumeric";
+            this.heightNumeric.Size = new System.Drawing.Size(60, 20);
+            this.heightNumeric.TabIndex = 5;
+            this.heightNumeric.Value = new decimal(new int[] {
             5,
             0,
             0,
@@ -157,27 +157,27 @@ namespace GOLStartUpTemplate
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
-            this.Controls.Add(this.numericUpDown3);
-            this.Controls.Add(this.numericUpDown2);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.heightNumeric);
+            this.Controls.Add(this.widthNumeric);
+            this.Controls.Add(this.timeNumeric);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OptionsSettingsDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Options Dialog";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.timeNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.widthNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heightNumeric)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
+        private System.Windows.Forms.NumericUpDown timeNumeric;
+        private System.Windows.Forms.NumericUpDown widthNumeric;
+        private System.Windows.Forms.NumericUpDown heightNumeric;
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label label1;
