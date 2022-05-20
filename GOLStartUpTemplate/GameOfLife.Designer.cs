@@ -34,7 +34,7 @@ namespace GOLStartUpTemplate
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newfile = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.open = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.save = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -114,7 +114,7 @@ namespace GOLStartUpTemplate
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.newfile,
-            this.openToolStripMenuItem,
+            this.open,
             this.toolStripSeparator,
             this.save,
             this.toolStripSeparator1,
@@ -136,14 +136,15 @@ namespace GOLStartUpTemplate
             this.newfile.Text = "&New";
             this.newfile.Click += new System.EventHandler(this.newfile_Click);
             // 
-            // openToolStripMenuItem
+            // open
             // 
-            this.openToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripMenuItem.Image")));
-            this.openToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openToolStripMenuItem.Text = "&Open";
+            this.open.Image = ((System.Drawing.Image)(resources.GetObject("open.Image")));
+            this.open.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.open.Name = "open";
+            this.open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.open.Size = new System.Drawing.Size(180, 22);
+            this.open.Text = "&Open";
+            this.open.Click += new System.EventHandler(this.open_Click);
             // 
             // toolStripSeparator
             // 
@@ -282,21 +283,21 @@ namespace GOLStartUpTemplate
             // fromSeedRandomize
             // 
             this.fromSeedRandomize.Name = "fromSeedRandomize";
-            this.fromSeedRandomize.Size = new System.Drawing.Size(180, 22);
+            this.fromSeedRandomize.Size = new System.Drawing.Size(173, 22);
             this.fromSeedRandomize.Text = "From Seed";
             this.fromSeedRandomize.Click += new System.EventHandler(this.fromSeedRandomize_Click);
             // 
             // fromCurrentSeed
             // 
             this.fromCurrentSeed.Name = "fromCurrentSeed";
-            this.fromCurrentSeed.Size = new System.Drawing.Size(180, 22);
+            this.fromCurrentSeed.Size = new System.Drawing.Size(173, 22);
             this.fromCurrentSeed.Text = "From Current Seed";
             this.fromCurrentSeed.Click += new System.EventHandler(this.fromCurrentSeed_Click);
             // 
             // fromTime
             // 
             this.fromTime.Name = "fromTime";
-            this.fromTime.Size = new System.Drawing.Size(180, 22);
+            this.fromTime.Size = new System.Drawing.Size(173, 22);
             this.fromTime.Text = "From Time";
             this.fromTime.Click += new System.EventHandler(this.fromTime_Click);
             // 
@@ -424,6 +425,7 @@ namespace GOLStartUpTemplate
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.openToolStripButton.Text = "&Open";
+            this.openToolStripButton.Click += new System.EventHandler(this.open_Click);
             // 
             // saveToolStripButton
             // 
@@ -433,6 +435,7 @@ namespace GOLStartUpTemplate
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Click += new System.EventHandler(this.save_Click);
             // 
             // toolStripSeparator6
             // 
@@ -613,7 +616,7 @@ namespace GOLStartUpTemplate
         private GraphicsPanel graphicsPanel1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newfile;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem open;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem save;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
