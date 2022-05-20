@@ -30,10 +30,16 @@ namespace GOLStartUpTemplate
         //}
 
         // Preferred way in C# Property
-        public int Number
+        public int Seed
         {
-            get { return (int)numericUpDownNumber.Value; }
-            set { numericUpDownNumber.Value = value; }
+            get { return (int)seed.Value; }
+            set { seed.Value = value; }
+        }
+
+        private void randomizeButton_Click(object sender, EventArgs e)
+        {
+            Random rng = new Random();
+            Seed = rng.Next(Int32.MinValue, Int32.MaxValue);
         }
     }
 }

@@ -31,10 +31,10 @@ namespace GOLStartUpTemplate
         {
             this.buttonOK = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.numericUpDownNumber = new System.Windows.Forms.NumericUpDown();
+            this.seed = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumber)).BeginInit();
+            this.randomizeButton = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.seed)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonOK
@@ -57,22 +57,22 @@ namespace GOLStartUpTemplate
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             // 
-            // numericUpDownNumber
+            // seed
             // 
-            this.numericUpDownNumber.Location = new System.Drawing.Point(94, 29);
-            this.numericUpDownNumber.Maximum = new decimal(new int[] {
-            1215752192,
-            23,
+            this.seed.Location = new System.Drawing.Point(94, 29);
+            this.seed.Maximum = new decimal(new int[] {
+            2147483646,
+            0,
             0,
             0});
-            this.numericUpDownNumber.Minimum = new decimal(new int[] {
-            1215752192,
-            23,
+            this.seed.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
             0,
             -2147483648});
-            this.numericUpDownNumber.Name = "numericUpDownNumber";
-            this.numericUpDownNumber.Size = new System.Drawing.Size(130, 20);
-            this.numericUpDownNumber.TabIndex = 3;
+            this.seed.Name = "seed";
+            this.seed.Size = new System.Drawing.Size(130, 20);
+            this.seed.TabIndex = 3;
             // 
             // label1
             // 
@@ -83,34 +83,35 @@ namespace GOLStartUpTemplate
             this.label1.TabIndex = 4;
             this.label1.Text = "Seed";
             // 
-            // button1
+            // randomizeButton
             // 
-            this.button1.Location = new System.Drawing.Point(230, 29);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Randomize";
-            this.button1.UseVisualStyleBackColor = true;
+            this.randomizeButton.Location = new System.Drawing.Point(230, 29);
+            this.randomizeButton.Name = "randomizeButton";
+            this.randomizeButton.Size = new System.Drawing.Size(75, 23);
+            this.randomizeButton.TabIndex = 5;
+            this.randomizeButton.Text = "Randomize";
+            this.randomizeButton.UseVisualStyleBackColor = true;
+            this.randomizeButton.Click += new System.EventHandler(this.randomizeButton_Click);
             // 
-            // ViewDialog
+            // FromSeedDialog
             // 
             this.AcceptButton = this.buttonOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(351, 137);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.randomizeButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDownNumber);
+            this.Controls.Add(this.seed);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonOK);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "ViewDialog";
+            this.Name = "FromSeedDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seed Dialog";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.seed)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,8 +121,8 @@ namespace GOLStartUpTemplate
 
         private System.Windows.Forms.Button buttonOK;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.NumericUpDown numericUpDownNumber;
+        private System.Windows.Forms.NumericUpDown seed;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button randomizeButton;
     }
 }

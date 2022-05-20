@@ -30,8 +30,8 @@ namespace GOLStartUpTemplate
         Color temp = Color.Red;
 
         // Global Variable
-        //Color color = Color.Red;
-        Brush brush;// = new SolidBrush(Color.Red);
+        Brush brush;
+        int seed;
 
         // The Timer class
         Timer timer = new Timer();
@@ -51,6 +51,8 @@ namespace GOLStartUpTemplate
             cellColor = Properties.Settings.Default.CellColor;
             xa = Properties.Settings.Default.CellWidthCount;
             ya = Properties.Settings.Default.CellHeightCount;
+            seed = Properties.Settings.Default.Seed;
+
             // Setup the timer
             timer.Interval = Properties.Settings.Default.TimerInterval;
             //timer.Interval = 100; // milliseconds
@@ -136,35 +138,6 @@ namespace GOLStartUpTemplate
 
             // Invalidate graphics panel
             graphicsPanel1.Invalidate();
-        }
-
-        private void Random()
-        {   // Time
-            Random time = new Random();
-
-            // Seed
-            int n = 0;
-            Random seed = new Random(n);
-
-            for (int y = 0; y < universe.GetLength(1); y++)
-            {
-                // Iterate through the universe in the x, left to right
-                for (int x = 0; x < universe.GetLength(0); x++)
-                {
-                    int o = time.Next(0,2);
-                    if (o == 0)
-                    {
-                        universe[x, y] = true;
-                    }
-                    else
-                    {
-                        universe[x, y] = false;
-                    }
-                }
-            }
-            //universe = new bool[xa, ya];
-            //graphicsPanel1.Invalidate();
-
         }
 
         // The event called by the timer every Interval milliseconds.
@@ -517,8 +490,30 @@ namespace GOLStartUpTemplate
         private void fromSeedRandomize_Click(object sender, EventArgs e)
         {
             FromSeedDialog dlg = new FromSeedDialog();
+
+            // Seed
+            dlg.Seed = seed;
+                        
             if (DialogResult.OK == dlg.ShowDialog())
             {
+                Random rng = new Random(dlg.Seed);
+                for (int y = 0; y < universe.GetLength(1); y++)
+                {
+                    // Iterate through the universe in the x, left to right
+                    for (int x = 0; x < universe.GetLength(0); x++)
+                    {
+                        int n = rng.Next(0, 2);
+                        if (n == 0)
+                        {
+                            universe[x, y] = true;
+                        }
+                        else
+                        {
+                            universe[x, y] = false;
+                        }
+                    }
+                }
+                seed = dlg.Seed;
                 graphicsPanel1.Invalidate();
             }
         }
@@ -551,6 +546,7 @@ namespace GOLStartUpTemplate
             Properties.Settings.Default.CellWidthCount = xa;
             Properties.Settings.Default.CellHeightCount = ya;
             Properties.Settings.Default.TimerInterval = timer.Interval;
+            Properties.Settings.Default.Seed = seed;
             Properties.Settings.Default.Save();
         }
 
@@ -566,6 +562,7 @@ namespace GOLStartUpTemplate
             xa = Properties.Settings.Default.CellWidthCount;
             ya = Properties.Settings.Default.CellHeightCount;
             timer.Interval = Properties.Settings.Default.TimerInterval;
+            seed = Properties.Settings.Default.Seed;
         }
 
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -580,16 +577,13 @@ namespace GOLStartUpTemplate
             xa = Properties.Settings.Default.CellWidthCount;
             ya = Properties.Settings.Default.CellHeightCount;
             timer.Interval = Properties.Settings.Default.TimerInterval;
+            seed = Properties.Settings.Default.Seed;
         }
 
         private void fromTime_Click(object sender, EventArgs e)
         {
             // Time
-            Random time = new Random();
-
-            // Seed
-            int n = 0;
-            Random seed = new Random(n);
+            Random time = new Random();           
 
             for (int y = 0; y < universe.GetLength(1); y++)
             {
