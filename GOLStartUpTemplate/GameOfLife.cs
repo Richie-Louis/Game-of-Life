@@ -138,6 +138,35 @@ namespace GOLStartUpTemplate
             graphicsPanel1.Invalidate();
         }
 
+        private void Random()
+        {   // Time
+            Random time = new Random();
+
+            // Seed
+            int n = 0;
+            Random seed = new Random(n);
+
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0); x++)
+                {
+                    int o = time.Next(0,2);
+                    if (o == 0)
+                    {
+                        universe[x, y] = true;
+                    }
+                    else
+                    {
+                        universe[x, y] = false;
+                    }
+                }
+            }
+            //universe = new bool[xa, ya];
+            //graphicsPanel1.Invalidate();
+
+        }
+
         // The event called by the timer every Interval milliseconds.
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -551,6 +580,34 @@ namespace GOLStartUpTemplate
             xa = Properties.Settings.Default.CellWidthCount;
             ya = Properties.Settings.Default.CellHeightCount;
             timer.Interval = Properties.Settings.Default.TimerInterval;
+        }
+
+        private void fromTime_Click(object sender, EventArgs e)
+        {
+            // Time
+            Random time = new Random();
+
+            // Seed
+            int n = 0;
+            Random seed = new Random(n);
+
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0); x++)
+                {
+                    int o = time.Next(0, 2);
+                    if (o == 0)
+                    {
+                        universe[x, y] = true;
+                    }
+                    else
+                    {
+                        universe[x, y] = false;
+                    }
+                }
+            }
+            graphicsPanel1.Invalidate();
         }
     }
 }
