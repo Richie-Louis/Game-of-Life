@@ -603,5 +603,28 @@ namespace GOLStartUpTemplate
             }
             graphicsPanel1.Invalidate();
         }
+
+        private void fromCurrentSeed_Click(object sender, EventArgs e)
+        {
+            // Seed
+            Random rng = new Random(seed);
+                for (int y = 0; y < universe.GetLength(1); y++)
+                {
+                    // Iterate through the universe in the x, left to right
+                    for (int x = 0; x < universe.GetLength(0); x++)
+                    {
+                        int n = rng.Next(0, 2);
+                        if (n == 0)
+                        {
+                            universe[x, y] = true;
+                        }
+                        else
+                        {
+                            universe[x, y] = false;
+                        }
+                    }
+                }
+                graphicsPanel1.Invalidate();
+        }
     }
 }
