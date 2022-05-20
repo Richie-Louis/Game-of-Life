@@ -17,13 +17,13 @@ namespace GOLStartUpTemplate
             InitializeComponent();
         }
 
-        public int Width
+        public int WidthX
         {
             get { return (int)widthNumeric.Value; }
             set { widthNumeric.Value = value; }
         }
 
-        public int Height
+        public int HeightY
         {
             get { return (int)heightNumeric.Value; }
             set { heightNumeric.Value = value; }

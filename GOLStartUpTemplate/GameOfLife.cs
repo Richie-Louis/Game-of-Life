@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace GOLStartUpTemplate
 {
@@ -15,7 +16,7 @@ namespace GOLStartUpTemplate
         int s = 0;
 
         // The universe array
-        bool[,] universe = new bool[Properties.Settings.Default.CellWidthCount, Properties.Settings.Default.CellHeightCount];        
+        bool[,] universe = new bool[Properties.Settings.Default.CellWidthCount, Properties.Settings.Default.CellHeightCount];
         int xa;
         int ya;
 
@@ -123,7 +124,7 @@ namespace GOLStartUpTemplate
                                 scratchpad[x, y] = true;
                             }
                         }
-                    }                  
+                    }
                 }
             }
             bool[,] temp = universe;
@@ -221,9 +222,9 @@ namespace GOLStartUpTemplate
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                 }
             }
-                    //universe = new bool[xa, ya];
-                    //graphicsPanel1.Invalidate();
-            
+            //universe = new bool[xa, ya];
+            //graphicsPanel1.Invalidate();
+
             // Cleaning up pens and brushes
             gridPen.Dispose();
             cellBrush.Dispose();
@@ -427,13 +428,13 @@ namespace GOLStartUpTemplate
             ColorDialog dlg = new ColorDialog();
             dlg.Color = gridColor;
             if (DialogResult.OK == dlg.ShowDialog())
-            {               
+            {
                 gridColor = dlg.Color;
                 temp = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
         }
-            
+
 
         private void cellColor_Click(object sender, EventArgs e)
         {
@@ -484,7 +485,7 @@ namespace GOLStartUpTemplate
                 gridColorToolStripMenuItem1.Enabled = true;
             }
 
-            graphicsPanel1.Invalidate();            
+            graphicsPanel1.Invalidate();
         }
 
         private void fromSeedRandomize_Click(object sender, EventArgs e)
@@ -493,7 +494,7 @@ namespace GOLStartUpTemplate
 
             // Seed
             dlg.Seed = seed;
-                        
+
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 Random rng = new Random(dlg.Seed);
@@ -520,15 +521,15 @@ namespace GOLStartUpTemplate
 
         private void optionsSettings_Click(object sender, EventArgs e)
         {
-           
+
             OptionsSettingsDialog dlg = new OptionsSettingsDialog();
-            dlg.Width = xa;
-            dlg.Height = ya;
+            dlg.WidthX = xa;
+            dlg.HeightY = ya;
             dlg.Timer = timer.Interval;
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                xa = dlg.Width;
-                ya = dlg.Height;
+                xa = dlg.WidthX;
+                ya = dlg.HeightY;
                 timer.Interval = dlg.Timer;
                 universe = new bool[xa, ya];
                 graphicsPanel1.Invalidate();
@@ -583,7 +584,7 @@ namespace GOLStartUpTemplate
         private void fromTime_Click(object sender, EventArgs e)
         {
             // Time
-            Random time = new Random();           
+            Random time = new Random();
 
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -608,23 +609,73 @@ namespace GOLStartUpTemplate
         {
             // Seed
             Random rng = new Random(seed);
-                for (int y = 0; y < universe.GetLength(1); y++)
+            for (int y = 0; y < universe.GetLength(1); y++)
+            {
+                // Iterate through the universe in the x, left to right
+                for (int x = 0; x < universe.GetLength(0); x++)
                 {
-                    // Iterate through the universe in the x, left to right
-                    for (int x = 0; x < universe.GetLength(0); x++)
+                    int n = rng.Next(0, 2);
+                    if (n == 0)
                     {
-                        int n = rng.Next(0, 2);
-                        if (n == 0)
-                        {
-                            universe[x, y] = true;
-                        }
-                        else
-                        {
-                            universe[x, y] = false;
-                        }
+                        universe[x, y] = true;
+                    }
+                    else
+                    {
+                        universe[x, y] = false;
                     }
                 }
-                graphicsPanel1.Invalidate();
+            }
+            graphicsPanel1.Invalidate();
+        }
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.Filter = "All Files|*.*|Cells|*.cells";
+            dlg.FilterIndex = 2; dlg.DefaultExt = "cells";
+
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                StreamWriter writer = new StreamWriter(dlg.FileName);
+
+                // Write any comments you want to include first.
+                // Prefix all comment strings with an exclamation point.
+                // Use WriteLine to write the strings to the file. 
+                // It appends a CRLF for you.
+                writer.WriteLine("!" + System.DateTime.Now.ToString());
+
+                // Iterate through the universe one row at a time.
+                for (int y = 0; y < universe.GetLength(1); y++)
+                {
+                    // Create a string to represent the current row.
+                    String currentRow = string.Empty;
+
+                    // Iterate through the current row one cell at a time.
+                    for (int x = 0; x < universe.GetLength(0); x++)
+                    {
+                        // If the universe[x,y] is alive then append 'O' (capital O)
+                        // to the row string.
+                        if (universe[x, y] == true)
+                        {
+                            currentRow += 'O';
+                        }
+
+                        // Else if the universe[x,y] is dead then append '.' (period)
+                        // to the row string.
+                        else
+                        {
+                            currentRow += '.';
+                        }
+                    }
+
+                    // Once the current row has been read through and the 
+                    // string constructed then write it to the file using WriteLine.
+                    writer.WriteLine(currentRow);
+                }
+
+                // After all rows and columns have been written then close the file.
+                writer.Close();
+            }
         }
     }
 }
