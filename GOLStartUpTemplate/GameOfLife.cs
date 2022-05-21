@@ -504,17 +504,20 @@ namespace GOLStartUpTemplate
         {
             if (gridView.Checked == false)
             {
+                gridToolStripMenuItem.Checked = false;
                 gridColor = Color.Empty;
                 gridColorToolStripMenuItem.Enabled = false;
                 gridColorToolStripMenuItem1.Enabled = false;
             }
+            
             else
             {
+                gridToolStripMenuItem.Checked = true;
                 gridColor = temp;
                 gridColorToolStripMenuItem.Enabled = true;
                 gridColorToolStripMenuItem1.Enabled = true;
             }
-
+            
             graphicsPanel1.Invalidate();
         }
 
@@ -624,6 +627,7 @@ namespace GOLStartUpTemplate
             ya = Properties.Settings.Default.CellHeightCount;
             timer.Interval = Properties.Settings.Default.TimerInterval;
             seed = Properties.Settings.Default.Seed;
+            graphicsPanel1.Invalidate();
         }
 
         private void fromTime_Click(object sender, EventArgs e)
@@ -736,6 +740,8 @@ namespace GOLStartUpTemplate
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
+                //Properties.Settings.Default.Reload();
+
                 StreamReader reader = new StreamReader(dlg.FileName);
                 generations = 0;
                 toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
@@ -834,6 +840,25 @@ namespace GOLStartUpTemplate
                 viewNeighborCount.Checked = true;
                 //neighborCountToolStripMenuItem.Checked = true;
                 countColor = countColor2;
+            }
+            graphicsPanel1.Invalidate();
+        }
+
+        private void gridToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (gridToolStripMenuItem.Checked == false)
+            {
+                gridView.Checked = false;
+                gridColor = Color.Empty;
+                gridColorToolStripMenuItem.Enabled = false;
+                gridColorToolStripMenuItem1.Enabled = false;
+            }
+            else
+            {
+                gridView.Checked = true;
+                gridColor = temp;
+                gridColorToolStripMenuItem.Enabled = true;
+                gridColorToolStripMenuItem1.Enabled = true;
             }
             graphicsPanel1.Invalidate();
         }
