@@ -629,7 +629,7 @@ namespace GOLStartUpTemplate
         {
             // Time
             Random time = new Random(DateTime.Now.Minute);
-            
+
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
@@ -911,7 +911,8 @@ namespace GOLStartUpTemplate
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(@"C:\Users\robor\OneDrive\Documents\Richie’s Game of Life About File.docx");
+            string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName; ;
+            System.Diagnostics.Process.Start($@"{path}\Richie Game of Life About File.docx");
         }
     }
 }
