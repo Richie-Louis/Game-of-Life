@@ -27,21 +27,19 @@ namespace GOLStartUpTemplate
         int maxHeight = 0;
 
         // Color
-        //int number = 10;
-        Color countColor;// = Color.White;
-        Color countColor2;// = Color.White;
+        Color countColor;
+        Color countColor2;
         Color hudColor;
         Color hudColor2;
 
         // Drawing colors
-        Color gridColor;// = Color.Red;
-        Color cellColor;// = Color.AntiqueWhite;
+        Color gridColor;
+        Color cellColor;
         Color temp = Color.Red;
 
         // Global Variable
         Brush brush;
         int seed;
-        int seed2 = 0;
 
         // The Timer class
         Timer timer = new Timer();
@@ -74,11 +72,7 @@ namespace GOLStartUpTemplate
         // Calculate the next generation of cells
         private void NextGeneration()
         {
-            //universe = new bool[20, 20];
-          
             scratchpad = new bool[xa, ya];
-            
-      
 
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -87,56 +81,55 @@ namespace GOLStartUpTemplate
                     if (s == 0)
                     {
                         int count = CountNeighborsFinite(x, y);
-                        if (count > 0)
+
+                        if (universe[x, y] == true && count < 2)
                         {
-                            if (universe[x, y] == true && count < 2)
-                            {
-                                scratchpad[x, y] = false;
-                            }
-                            else if (universe[x, y] == true && count > 3)
-                            {
-                                scratchpad[x, y] = false;
-                            }
-                            else if (universe[x, y] == true && count == 2)
-                            {
-                                scratchpad[x, y] = true;
-                            }
-                            else if (universe[x, y] == true && count == 3)
-                            {
-                                scratchpad[x, y] = true;
-                            }
-                            else if (universe[x, y] == false && count == 3)
-                            {
-                                scratchpad[x, y] = true;
-                            }
+                            scratchpad[x, y] = false;
                         }
+                        else if (universe[x, y] == true && count > 3)
+                        {
+                            scratchpad[x, y] = false;
+                        }
+                        else if (universe[x, y] == true && count == 2)
+                        {
+                            scratchpad[x, y] = true;
+                        }
+                        else if (universe[x, y] == true && count == 3)
+                        {
+                            scratchpad[x, y] = true;
+                        }
+                        else if (universe[x, y] == false && count == 3)
+                        {
+                            scratchpad[x, y] = true;
+                        }
+
                     }
+
                     if (s == 1)
                     {
                         int count = CountNeighborsToroidal(x, y);
-                        if (count > 0)
+
+                        if (universe[x, y] == true && count < 2)
                         {
-                            if (universe[x, y] == true && count < 2)
-                            {
-                                scratchpad[x, y] = false;
-                            }
-                            else if (universe[x, y] == true && count > 3)
-                            {
-                                scratchpad[x, y] = false;
-                            }
-                            else if (universe[x, y] == true && count == 2)
-                            {
-                                scratchpad[x, y] = true;
-                            }
-                            else if (universe[x, y] == true && count == 3)
-                            {
-                                scratchpad[x, y] = true;
-                            }
-                            else if (universe[x, y] == false && count == 3)
-                            {
-                                scratchpad[x, y] = true;
-                            }
+                            scratchpad[x, y] = false;
                         }
+                        else if (universe[x, y] == true && count > 3)
+                        {
+                            scratchpad[x, y] = false;
+                        }
+                        else if (universe[x, y] == true && count == 2)
+                        {
+                            scratchpad[x, y] = true;
+                        }
+                        else if (universe[x, y] == true && count == 3)
+                        {
+                            scratchpad[x, y] = true;
+                        }
+                        else if (universe[x, y] == false && count == 3)
+                        {
+                            scratchpad[x, y] = true;
+                        }
+
                     }
                 }
             }
@@ -161,14 +154,8 @@ namespace GOLStartUpTemplate
         }
 
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
-        {
-            //universe = new bool[xa, ya];
-            bool[,] temp = universe;
-            temp = new bool[xa, ya];
+        {   // Brush for finite and toroidal view
             brush = new SolidBrush(countColor);
-            //Brush numBrush = new SolidBrush(numColor);
-            //e.Graphics.DrawString(number.ToString(), graphicsPanel1.Font, numBrush, new PointF(0, 0));
-            //numBrush.Dispose();
 
             // Use float to make window precise
 
@@ -185,7 +172,7 @@ namespace GOLStartUpTemplate
             Brush cellBrush = new SolidBrush(cellColor);
 
             FontStyle fontStyle = FontStyle.Regular;
-            Font font = new Font("Arial",14, fontStyle);
+            Font font = new Font("Arial", 14, fontStyle);
 
             int alive = 0;
             string boundary = "";
@@ -216,10 +203,7 @@ namespace GOLStartUpTemplate
                     int finite = CountNeighborsFinite(x, y);
 
                     int toroidal = CountNeighborsToroidal(x, y);
-                    //if (count > 0)
-                    //{
-                    //    e.Graphics.DrawString($"{count}", font, brush, cellRect, format);
-                    //}
+
                     if (s == 0)
                     {
                         boundary = "Finite";
@@ -242,22 +226,18 @@ namespace GOLStartUpTemplate
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                 }
             }
-           
+
             StringFormat nformat = new StringFormat();
             nformat.Alignment = StringAlignment.Near;
             nformat.LineAlignment = StringAlignment.Far;
             FontStyle nfontStyle = FontStyle.Regular;
             Font nfont = new Font("Arial", 12, nfontStyle);
             Brush nbrush = new SolidBrush(hudColor);
-            e.Graphics.DrawString($"Generations: {generations}\nCell Count: {alive}\nBoundary Type: {boundary}\nUniverse Size: {{Width={xa}, Height={ya}}}", nfont, nbrush, graphicsPanel1.ClientRectangle,nformat);
-                    //e.Graphics.DrawString("Test", font, brush, graphicsPanel1.ClientRectangle, nformat);
+            e.Graphics.DrawString($"Generations: {generations}\nCell Count: {alive}\nBoundary Type: {boundary}\nUniverse Size: {{Width={xa}, Height={ya}}}", nfont, nbrush, graphicsPanel1.ClientRectangle, nformat);
 
             // Update status strip 
             aliveCellsNumber.Text = "Alive: " + alive.ToString();
             SeedLabel.Text = "Seed: " + seed.ToString();
-            //graphicsPanel1.Invalidate();
-            //universe = new bool[xa, ya];
-            //graphicsPanel1.Invalidate();
 
             // Cleaning up pens and brushes
             gridPen.Dispose();
@@ -400,7 +380,6 @@ namespace GOLStartUpTemplate
         }
         private void newfile_Click(object sender, EventArgs e)
         {
-            //generations = new int();
             generations = 0;
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
             seed = 0;
@@ -434,13 +413,11 @@ namespace GOLStartUpTemplate
         {
             if (viewNeighborCount.Checked == false)
             {
-                //viewNeighborCount.Checked = false;
                 neighborCountToolStripMenuItem.Checked = false;
                 countColor = Color.Empty;
             }
-            else //if (viewNeighborCount.Checked == true || neighborCountToolStripMenuItem.Checked == true)
+            else
             {
-                //viewNeighborCount.Checked = true;
                 neighborCountToolStripMenuItem.Checked = true;
                 countColor = countColor2;
             }
@@ -523,7 +500,7 @@ namespace GOLStartUpTemplate
                 gridColorToolStripMenuItem.Enabled = false;
                 gridColorToolStripMenuItem1.Enabled = false;
             }
-            
+
             else
             {
                 gridToolStripMenuItem.Checked = true;
@@ -531,7 +508,7 @@ namespace GOLStartUpTemplate
                 gridColorToolStripMenuItem.Enabled = true;
                 gridColorToolStripMenuItem1.Enabled = true;
             }
-            
+
             graphicsPanel1.Invalidate();
         }
 
@@ -583,10 +560,8 @@ namespace GOLStartUpTemplate
             dlg.Timer = timer.Interval;
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                
                 xa = dlg.WidthX;
                 ya = dlg.HeightY;
-                
                 timer.Interval = dlg.Timer;
                 universe = new bool[xa, ya];
                 scratchpad = new bool[xa, ya];
@@ -653,11 +628,10 @@ namespace GOLStartUpTemplate
         private void fromTime_Click(object sender, EventArgs e)
         {
             // Time
-            Random time = new Random();
-
+            Random time = new Random(DateTime.Now.Minute);
+            
             for (int y = 0; y < universe.GetLength(1); y++)
             {
-                // Iterate through the universe in the x, left to right
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
                     int o = time.Next(0, 2);
@@ -680,7 +654,6 @@ namespace GOLStartUpTemplate
             Random rng = new Random(seed);
             for (int y = 0; y < universe.GetLength(1); y++)
             {
-                // Iterate through the universe in the x, left to right
                 for (int x = 0; x < universe.GetLength(0); x++)
                 {
                     int n = rng.Next(0, 2);
@@ -706,10 +679,7 @@ namespace GOLStartUpTemplate
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 StreamWriter writer = new StreamWriter(dlg.FileName);
-                //seed2 = seed;
                 writer.WriteLine(seed);
-                //Properties.Settings.Default.Seed = seed;
-
 
                 // Write any comments you want to include first.
                 // Prefix all comment strings with an exclamation point.
@@ -759,12 +729,10 @@ namespace GOLStartUpTemplate
 
             if (DialogResult.OK == dlg.ShowDialog())
             {
-                //Properties.Settings.Default.Reload();
-
                 StreamReader reader = new StreamReader(dlg.FileName);
                 generations = 0;
                 toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
-                
+
                 // Create a couple variables to calculate the width and height
                 // of the data in the file.
                 maxWidth = 0;
@@ -847,9 +815,8 @@ namespace GOLStartUpTemplate
                             universe[xPos, yPos] = false;
                         }
                     }
-                        yPos++;
+                    yPos++;
                 }
-                //seed = seed2;
                 xa = maxWidth;
                 ya = maxHeight;
                 graphicsPanel1.Invalidate();
@@ -863,13 +830,11 @@ namespace GOLStartUpTemplate
             if (neighborCountToolStripMenuItem.Checked == false)
             {
                 viewNeighborCount.Checked = false;
-                //neighborCountToolStripMenuItem.Checked = false;
                 countColor = Color.Empty;
             }
-            else //if (viewNeighborCount.Checked == true || neighborCountToolStripMenuItem.Checked == true)
+            else
             {
                 viewNeighborCount.Checked = true;
-                //neighborCountToolStripMenuItem.Checked = true;
                 countColor = countColor2;
             }
             graphicsPanel1.Invalidate();
@@ -942,6 +907,11 @@ namespace GOLStartUpTemplate
                 hudColor2 = dlg.Color;
                 graphicsPanel1.Invalidate();
             }
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(@"C:\Users\robor\OneDrive\Documents\Richie’s Game of Life About File.docx");
         }
     }
 }
