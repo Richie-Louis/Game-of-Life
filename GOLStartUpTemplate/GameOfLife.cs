@@ -17,10 +17,14 @@ namespace GOLStartUpTemplate
 
         // The universe array
         bool[,] universe = new bool[Properties.Settings.Default.CellWidthCount, Properties.Settings.Default.CellHeightCount];
+        //bool[,] universe = new bool[10, 10];
         // The scratchpad array
         bool[,] scratchpad = new bool[Properties.Settings.Default.CellWidthCount, Properties.Settings.Default.CellHeightCount];
+        //bool[,] scratchpad = new bool[10, 10];
         int xa;
         int ya;
+        int maxWidth = 0;
+        int maxHeight = 0;
 
         // Color
         //int number = 10;
@@ -55,7 +59,6 @@ namespace GOLStartUpTemplate
             xa = Properties.Settings.Default.CellWidthCount;
             ya = Properties.Settings.Default.CellHeightCount;
             seed = Properties.Settings.Default.Seed;
-
             // Setup the timer
             timer.Interval = Properties.Settings.Default.TimerInterval;
             //timer.Interval = 100; // milliseconds
@@ -66,8 +69,16 @@ namespace GOLStartUpTemplate
         // Calculate the next generation of cells
         private void NextGeneration()
         {
-            //universe = new bool[xa, ya];
-            
+            //universe = new bool[20, 20];
+            if(maxWidth != 0)
+            {
+            scratchpad = new bool[maxWidth, maxHeight];
+            }
+            else
+            {
+                scratchpad = new bool[xa, ya];
+            }
+
             for (int y = 0; y < universe.GetLength(1); y++)
             {
                 for (int x = 0; x < universe.GetLength(0); x++)
@@ -172,6 +183,7 @@ namespace GOLStartUpTemplate
             FontStyle fontStyle = FontStyle.Regular;
             Font font = new Font("Arial Black", 10, fontStyle);
 
+            int alive = 0;
 
             // Iterate through the universe in the y, top to bottom
             for (int y = 0; y < universe.GetLength(1); y++)
@@ -192,6 +204,7 @@ namespace GOLStartUpTemplate
                     if (universe[x, y] == true)
                     {
                         e.Graphics.FillRectangle(cellBrush, cellRect);
+                        alive++;
                     }
                     int count = CountNeighborsFinite(x, y);
 
@@ -223,6 +236,10 @@ namespace GOLStartUpTemplate
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                 }
             }
+            
+            // Update status strip alive
+            aliveCellsNumber.Text = "Alive: " + alive.ToString();
+            //graphicsPanel1.Invalidate();
             //universe = new bool[xa, ya];
             //graphicsPanel1.Invalidate();
 
@@ -367,6 +384,10 @@ namespace GOLStartUpTemplate
         }
         private void newfile_Click(object sender, EventArgs e)
         {
+            //generations = new int();
+            generations = 0;
+            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+
             float cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
             float cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
 
@@ -384,6 +405,7 @@ namespace GOLStartUpTemplate
                     cellRect.Width = cellWidth;
                     cellRect.Height = cellHeight;
                     universe[x, y] = false;
+                    scratchpad[x, y] = false;
                 }
             }
             gridPen.Dispose();
@@ -524,13 +546,23 @@ namespace GOLStartUpTemplate
         {
 
             OptionsSettingsDialog dlg = new OptionsSettingsDialog();
-            dlg.WidthX = xa;
-            dlg.HeightY = ya;
+            if (maxWidth != 0)
+            {
+                dlg.WidthX = maxWidth;
+                dlg.HeightY = maxHeight;
+            }
+            else
+            {
+                dlg.WidthX = xa;
+                dlg.HeightY = ya;
+            }
             dlg.Timer = timer.Interval;
             if (DialogResult.OK == dlg.ShowDialog())
             {
+                
                 xa = dlg.WidthX;
                 ya = dlg.HeightY;
+                
                 timer.Interval = dlg.Timer;
                 universe = new bool[xa, ya];
                 scratchpad = new bool[xa, ya];
@@ -689,11 +721,12 @@ namespace GOLStartUpTemplate
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 StreamReader reader = new StreamReader(dlg.FileName);
-
+                generations = 0;
+                toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
                 // Create a couple variables to calculate the width and height
                 // of the data in the file.
-                int maxWidth = 0;
-                int maxHeight = 0;
+                maxWidth = 0;
+                maxHeight = 0;
 
                 // Iterate through the file once to get its size.
                 while (!reader.EndOfStream)
@@ -770,5 +803,6 @@ namespace GOLStartUpTemplate
                 reader.Close();
             }
         }
+
     }
 }
