@@ -184,7 +184,7 @@ namespace GOLStartUpTemplate
             Brush cellBrush = new SolidBrush(cellColor);
 
             FontStyle fontStyle = FontStyle.Regular;
-            Font font = new Font("Arial",10, fontStyle);
+            Font font = new Font("Arial",14, fontStyle);
 
             int alive = 0;
 
@@ -418,12 +418,16 @@ namespace GOLStartUpTemplate
 
         private void viewNeighborCount_Click(object sender, EventArgs e)
         {
-            if (viewNeighborCount.Checked != true)
+            if (viewNeighborCount.Checked == false)
             {
+                //viewNeighborCount.Checked = false;
+                neighborCountToolStripMenuItem.Checked = false;
                 countColor = Color.Empty;
             }
-            else
+            else //if (viewNeighborCount.Checked == true || neighborCountToolStripMenuItem.Checked == true)
             {
+                //viewNeighborCount.Checked = true;
+                neighborCountToolStripMenuItem.Checked = true;
                 countColor = countColor2;
             }
             graphicsPanel1.Invalidate();
@@ -678,6 +682,11 @@ namespace GOLStartUpTemplate
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 StreamWriter writer = new StreamWriter(dlg.FileName);
+                Properties.Settings.Default.PanelColor = graphicsPanel1.BackColor;
+                Properties.Settings.Default.CountColor = countColor;
+                Properties.Settings.Default.CountColor = countColor2;
+                Properties.Settings.Default.GridColor = gridColor;
+                Properties.Settings.Default.CellColor = cellColor;
 
                 // Write any comments you want to include first.
                 // Prefix all comment strings with an exclamation point.
@@ -730,6 +739,7 @@ namespace GOLStartUpTemplate
                 StreamReader reader = new StreamReader(dlg.FileName);
                 generations = 0;
                 toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+                
                 // Create a couple variables to calculate the width and height
                 // of the data in the file.
                 maxWidth = 0;
@@ -811,5 +821,21 @@ namespace GOLStartUpTemplate
             }
         }
 
+        private void neighborCountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (neighborCountToolStripMenuItem.Checked == false)
+            {
+                viewNeighborCount.Checked = false;
+                //neighborCountToolStripMenuItem.Checked = false;
+                countColor = Color.Empty;
+            }
+            else //if (viewNeighborCount.Checked == true || neighborCountToolStripMenuItem.Checked == true)
+            {
+                viewNeighborCount.Checked = true;
+                //neighborCountToolStripMenuItem.Checked = true;
+                countColor = countColor2;
+            }
+            graphicsPanel1.Invalidate();
+        }
     }
 }

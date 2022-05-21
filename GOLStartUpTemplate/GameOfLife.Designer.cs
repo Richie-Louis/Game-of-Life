@@ -507,7 +507,7 @@ namespace GOLStartUpTemplate
             this.color,
             this.view});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
             // 
             // color
             // 
@@ -555,7 +555,7 @@ namespace GOLStartUpTemplate
             this.neighborCountToolStripMenuItem,
             this.gridView});
             this.view.Name = "view";
-            this.view.Size = new System.Drawing.Size(103, 22);
+            this.view.Size = new System.Drawing.Size(180, 22);
             this.view.Text = "View";
             // 
             // hUDToolStripMenuItem
@@ -566,9 +566,13 @@ namespace GOLStartUpTemplate
             // 
             // neighborCountToolStripMenuItem
             // 
+            this.neighborCountToolStripMenuItem.Checked = true;
+            this.neighborCountToolStripMenuItem.CheckOnClick = true;
+            this.neighborCountToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.neighborCountToolStripMenuItem.Name = "neighborCountToolStripMenuItem";
-            this.neighborCountToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.neighborCountToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.neighborCountToolStripMenuItem.Text = "Neighbor Count";
+            this.neighborCountToolStripMenuItem.Click += new System.EventHandler(this.neighborCountToolStripMenuItem_Click);
             // 
             // gridView
             // 
