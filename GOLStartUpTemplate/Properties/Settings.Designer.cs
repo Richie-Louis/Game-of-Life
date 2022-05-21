@@ -118,5 +118,17 @@ namespace GOLStartUpTemplate.Properties {
                 this["Seed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("DimGray")]
+        public global::System.Drawing.Color HudColor {
+            get {
+                return ((global::System.Drawing.Color)(this["HudColor"]));
+            }
+            set {
+                this["HudColor"] = value;
+            }
+        }
     }
 }

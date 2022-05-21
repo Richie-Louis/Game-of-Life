@@ -30,6 +30,8 @@ namespace GOLStartUpTemplate
         //int number = 10;
         Color countColor;// = Color.White;
         Color countColor2;// = Color.White;
+        Color hudColor;
+        Color hudColor2;
 
         // Drawing colors
         Color gridColor;// = Color.Red;
@@ -54,6 +56,8 @@ namespace GOLStartUpTemplate
             graphicsPanel1.BackColor = Properties.Settings.Default.PanelColor;
             countColor = Properties.Settings.Default.CountColor;
             countColor2 = Properties.Settings.Default.CountColor;
+            hudColor = Properties.Settings.Default.HudColor;
+            hudColor2 = Properties.Settings.Default.HudColor;
             gridColor = Properties.Settings.Default.GridColor;
             cellColor = Properties.Settings.Default.CellColor;
             xa = Properties.Settings.Default.CellWidthCount;
@@ -70,14 +74,10 @@ namespace GOLStartUpTemplate
         private void NextGeneration()
         {
             //universe = new bool[20, 20];
-            if(maxWidth != 0)
-            {
-            scratchpad = new bool[maxWidth, maxHeight];
-            }
-            else
-            {
-                scratchpad = new bool[xa, ya];
-            }
+          
+            scratchpad = new bool[xa, ya];
+            
+      
 
             for (int y = 0; y < universe.GetLength(1); y++)
             {
@@ -187,6 +187,7 @@ namespace GOLStartUpTemplate
             Font font = new Font("Arial",14, fontStyle);
 
             int alive = 0;
+            string boundary = "";
 
             // Iterate through the universe in the y, top to bottom
             for (int y = 0; y < universe.GetLength(1); y++)
@@ -218,9 +219,9 @@ namespace GOLStartUpTemplate
                     //{
                     //    e.Graphics.DrawString($"{count}", font, brush, cellRect, format);
                     //}
-
                     if (s == 0)
                     {
+                        boundary = "Finite";
                         if (finite > 0)
                         {
                             //graphicsPanel1.Invalidate();
@@ -229,6 +230,7 @@ namespace GOLStartUpTemplate
                     }
                     if (s == 1)
                     {
+                        boundary = "Toroidal";
                         if (toroidal > 0)
                         {
                             e.Graphics.DrawString($"{toroidal}", font, brush, cellRect, format);
@@ -239,7 +241,16 @@ namespace GOLStartUpTemplate
                     e.Graphics.DrawRectangle(gridPen, cellRect.X, cellRect.Y, cellRect.Width, cellRect.Height);
                 }
             }
-            
+           
+            StringFormat nformat = new StringFormat();
+            nformat.Alignment = StringAlignment.Near;
+            nformat.LineAlignment = StringAlignment.Far;
+            FontStyle nfontStyle = FontStyle.Regular;
+            Font nfont = new Font("Arial", 12, nfontStyle);
+            Brush nbrush = new SolidBrush(hudColor);
+            e.Graphics.DrawString($"Generations: {generations}\nCell Count: {alive}\nBoundary Type: {boundary}\nUniverse Size: {{Width={xa}, Height={ya}}}", nfont, nbrush, graphicsPanel1.ClientRectangle,nformat);
+                    //e.Graphics.DrawString("Test", font, brush, graphicsPanel1.ClientRectangle, nformat);
+
             // Update status strip alive
             aliveCellsNumber.Text = "Alive: " + alive.ToString();
             //graphicsPanel1.Invalidate();
@@ -592,6 +603,8 @@ namespace GOLStartUpTemplate
             Properties.Settings.Default.CellHeightCount = ya;
             Properties.Settings.Default.TimerInterval = timer.Interval;
             Properties.Settings.Default.Seed = seed;
+            Properties.Settings.Default.HudColor = hudColor;
+            Properties.Settings.Default.HudColor = hudColor2;
             Properties.Settings.Default.Save();
         }
 
@@ -611,6 +624,8 @@ namespace GOLStartUpTemplate
             universe = new bool[xa, ya];
             timer.Interval = Properties.Settings.Default.TimerInterval;
             seed = Properties.Settings.Default.Seed;
+            hudColor = Properties.Settings.Default.HudColor;
+            hudColor2 = Properties.Settings.Default.HudColor;
             graphicsPanel1.Invalidate();
         }
 
@@ -627,6 +642,8 @@ namespace GOLStartUpTemplate
             ya = Properties.Settings.Default.CellHeightCount;
             timer.Interval = Properties.Settings.Default.TimerInterval;
             seed = Properties.Settings.Default.Seed;
+            hudColor = Properties.Settings.Default.HudColor;
+            hudColor2 = Properties.Settings.Default.HudColor;
             graphicsPanel1.Invalidate();
         }
 
@@ -821,6 +838,8 @@ namespace GOLStartUpTemplate
                     }
                         yPos++;
                 }
+                xa = maxWidth;
+                ya = maxHeight;
                 graphicsPanel1.Invalidate();
                 // Close the file.
                 reader.Close();
@@ -861,6 +880,56 @@ namespace GOLStartUpTemplate
                 gridColorToolStripMenuItem1.Enabled = true;
             }
             graphicsPanel1.Invalidate();
+        }
+
+        private void hudToolMenu_Click(object sender, EventArgs e)
+        {
+            if (hudToolMenu.Checked == false)
+            {
+                hudToolStrip.Checked = false;
+                hudColor = Color.Empty;
+                hudColors.Enabled = false;
+                hudColors2.Enabled = false;
+            }
+            else
+            {
+                hudToolStrip.Checked = true;
+                hudColors.Enabled = true;
+                hudColors2.Enabled = true;
+                hudColor = hudColor2;
+            }
+            graphicsPanel1.Invalidate();
+        }
+
+        private void hudToolStrip_Click(object sender, EventArgs e)
+        {
+            if (hudToolStrip.Checked == false)
+            {
+                hudToolMenu.Checked = false;
+                hudColor = Color.Empty;
+                hudColors.Enabled = false;
+                hudColors2.Enabled = false;
+            }
+            else
+            {
+                hudToolMenu.Checked = true;
+                hudColors.Enabled = true;
+                hudColors2.Enabled = true;
+                hudColor = hudColor2;
+            }
+            graphicsPanel1.Invalidate();
+        }
+
+        private void hudColors_Click(object sender, EventArgs e)
+        {
+            ColorDialog dlg = new ColorDialog();
+            dlg.Color = hudColor;
+            if (DialogResult.OK == dlg.ShowDialog())
+            {
+                hudColor = dlg.Color;
+                hudColor2 = dlg.Color;
+                graphicsPanel1.Invalidate();
+            }
         }
     }
 }
