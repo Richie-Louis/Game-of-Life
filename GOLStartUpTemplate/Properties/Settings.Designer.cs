@@ -37,7 +37,7 @@ namespace GOLStartUpTemplate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Maroon")]
         public global::System.Drawing.Color CountColor {
             get {
                 return ((global::System.Drawing.Color)(this["CountColor"]));
@@ -49,7 +49,7 @@ namespace GOLStartUpTemplate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("AntiqueWhite")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Chocolate")]
         public global::System.Drawing.Color CellColor {
             get {
                 return ((global::System.Drawing.Color)(this["CellColor"]));
@@ -73,7 +73,7 @@ namespace GOLStartUpTemplate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int CellWidthCount {
             get {
                 return ((int)(this["CellWidthCount"]));
@@ -85,7 +85,7 @@ namespace GOLStartUpTemplate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int CellHeightCount {
             get {
                 return ((int)(this["CellHeightCount"]));
@@ -97,7 +97,7 @@ namespace GOLStartUpTemplate.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("150")]
         public int TimerInterval {
             get {
                 return ((int)(this["TimerInterval"]));

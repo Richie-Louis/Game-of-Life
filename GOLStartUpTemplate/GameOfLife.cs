@@ -161,6 +161,9 @@ namespace GOLStartUpTemplate
 
         private void graphicsPanel1_Paint(object sender, PaintEventArgs e)
         {
+            //universe = new bool[xa, ya];
+            bool[,] temp = universe;
+            temp = new bool[xa, ya];
             brush = new SolidBrush(countColor);
             //Brush numBrush = new SolidBrush(numColor);
             //e.Graphics.DrawString(number.ToString(), graphicsPanel1.Font, numBrush, new PointF(0, 0));
@@ -181,7 +184,7 @@ namespace GOLStartUpTemplate
             Brush cellBrush = new SolidBrush(cellColor);
 
             FontStyle fontStyle = FontStyle.Regular;
-            Font font = new Font("Arial Black", 10, fontStyle);
+            Font font = new Font("Arial",10, fontStyle);
 
             int alive = 0;
 
@@ -589,6 +592,8 @@ namespace GOLStartUpTemplate
         {
             // Reseting the property
             Properties.Settings.Default.Reset();
+            generations = 0;
+            toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
             graphicsPanel1.BackColor = Properties.Settings.Default.PanelColor;
             countColor = Properties.Settings.Default.CountColor;
             countColor2 = Properties.Settings.Default.CountColor;
@@ -596,8 +601,10 @@ namespace GOLStartUpTemplate
             cellColor = Properties.Settings.Default.CellColor;
             xa = Properties.Settings.Default.CellWidthCount;
             ya = Properties.Settings.Default.CellHeightCount;
+            universe = new bool[xa, ya];
             timer.Interval = Properties.Settings.Default.TimerInterval;
             seed = Properties.Settings.Default.Seed;
+            graphicsPanel1.Invalidate();
         }
 
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)

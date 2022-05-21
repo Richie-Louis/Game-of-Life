@@ -582,6 +582,8 @@ namespace GOLStartUpTemplate
             // 
             // graphicsPanel1
             // 
+            this.graphicsPanel1.AutoSize = true;
+            this.graphicsPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.graphicsPanel1.ContextMenuStrip = this.contextMenuStrip1;
             this.graphicsPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphicsPanel1.Location = new System.Drawing.Point(0, 49);
