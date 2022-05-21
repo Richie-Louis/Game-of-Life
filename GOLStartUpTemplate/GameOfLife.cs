@@ -41,6 +41,7 @@ namespace GOLStartUpTemplate
         // Global Variable
         Brush brush;
         int seed;
+        int seed2 = 0;
 
         // The Timer class
         Timer timer = new Timer();
@@ -62,7 +63,7 @@ namespace GOLStartUpTemplate
             cellColor = Properties.Settings.Default.CellColor;
             xa = Properties.Settings.Default.CellWidthCount;
             ya = Properties.Settings.Default.CellHeightCount;
-            seed = Properties.Settings.Default.Seed;
+            //seed = Properties.Settings.Default.Seed;
             // Setup the timer
             timer.Interval = Properties.Settings.Default.TimerInterval;
             //timer.Interval = 100; // milliseconds
@@ -251,8 +252,9 @@ namespace GOLStartUpTemplate
             e.Graphics.DrawString($"Generations: {generations}\nCell Count: {alive}\nBoundary Type: {boundary}\nUniverse Size: {{Width={xa}, Height={ya}}}", nfont, nbrush, graphicsPanel1.ClientRectangle,nformat);
                     //e.Graphics.DrawString("Test", font, brush, graphicsPanel1.ClientRectangle, nformat);
 
-            // Update status strip alive
+            // Update status strip 
             aliveCellsNumber.Text = "Alive: " + alive.ToString();
+            SeedLabel.Text = "Seed: " + seed.ToString();
             //graphicsPanel1.Invalidate();
             //universe = new bool[xa, ya];
             //graphicsPanel1.Invalidate();
@@ -401,6 +403,7 @@ namespace GOLStartUpTemplate
             //generations = new int();
             generations = 0;
             toolStripStatusLabelGenerations.Text = "Generations = " + generations.ToString();
+            seed = 0;
 
             float cellWidth = graphicsPanel1.ClientSize.Width / universe.GetLength(0);
             float cellHeight = graphicsPanel1.ClientSize.Height / universe.GetLength(1);
@@ -703,11 +706,10 @@ namespace GOLStartUpTemplate
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 StreamWriter writer = new StreamWriter(dlg.FileName);
-                Properties.Settings.Default.PanelColor = graphicsPanel1.BackColor;
-                Properties.Settings.Default.CountColor = countColor;
-                Properties.Settings.Default.CountColor = countColor2;
-                Properties.Settings.Default.GridColor = gridColor;
-                Properties.Settings.Default.CellColor = cellColor;
+                //seed2 = seed;
+                writer.WriteLine(seed);
+                //Properties.Settings.Default.Seed = seed;
+
 
                 // Write any comments you want to include first.
                 // Prefix all comment strings with an exclamation point.
@@ -780,11 +782,15 @@ namespace GOLStartUpTemplate
                     {
                         continue;
                     }
+                    if (row.Any(char.IsDigit))
+                    {
+                        continue;
+                    }
 
                     // If the row is not a comment then it is a row of cells.
                     // Increment the maxHeight variable for each row read.
 
-                    if(!row.StartsWith("!"))
+                    if (!row.StartsWith("!") || !row.Any(char.IsDigit))
                     {
                         maxHeight++;
                     }
@@ -817,6 +823,11 @@ namespace GOLStartUpTemplate
                     {
                         continue;
                     }
+                    if (row.Any(char.IsDigit))
+                    {
+                        seed = Convert.ToInt32(row);
+                        continue;
+                    }
 
                     // If the row is not a comment then 
                     // it is a row of cells and needs to be iterated through.
@@ -838,6 +849,7 @@ namespace GOLStartUpTemplate
                     }
                         yPos++;
                 }
+                //seed = seed2;
                 xa = maxWidth;
                 ya = maxHeight;
                 graphicsPanel1.Invalidate();
