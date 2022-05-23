@@ -514,7 +514,7 @@ namespace GOLStartUpTemplate
 
         private void fromSeedRandomize_Click(object sender, EventArgs e)
         {
-            FromSeedDialog dlg = new FromSeedDialog();
+            FromSeedDialog dlg = new FromSeedDialog();      
 
             // Seed
             dlg.Seed = seed;
@@ -545,7 +545,7 @@ namespace GOLStartUpTemplate
 
         private void optionsSettings_Click(object sender, EventArgs e)
         {
-
+            
             OptionsSettingsDialog dlg = new OptionsSettingsDialog();
             if (maxWidth != 0)
             {
@@ -622,6 +622,8 @@ namespace GOLStartUpTemplate
             seed = Properties.Settings.Default.Seed;
             hudColor = Properties.Settings.Default.HudColor;
             hudColor2 = Properties.Settings.Default.HudColor;
+            universe = new bool[xa, ya];
+            scratchpad = new bool[xa, ya];
             graphicsPanel1.Invalidate();
         }
 
