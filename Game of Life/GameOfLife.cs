@@ -8,11 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Media;
+
+// Try adding audio to the project and choices
 
 namespace GOLStartUpTemplate
 {
     public partial class GameOfLife : Form
     {   // Global variable for finite or toriodal view
+        // Finite = 0
+        // Toroidal = 1
         int s = 0;
 
         // The universe array
@@ -46,6 +51,16 @@ namespace GOLStartUpTemplate
 
         // Generation count
         int generations = 0;
+
+        // Adding audio
+        SoundPlayer music1 = new SoundPlayer(@"C:\Users\robor\Music\WAV\Diamond no Ace Opening 3 full.wav");
+        SoundPlayer music2 = new SoundPlayer(@"C:\Users\robor\Music\WAV\Savage Genius- Watashi wo mitsukete (Pandora Hearts-ED-2).wav");
+        SoundPlayer music3 = new SoundPlayer(@"C:\Users\robor\Music\WAV\Baton.wav");
+        SoundPlayer music4 = new SoundPlayer(@"C:\Users\robor\Music\WAV\Minami-Ke Okaeri - Merry Christmas S.wav");
+        string m1 = "Diamond no Ace Opening 3 full";
+        string m2 = "Savage Genius- Watashi wo mitsukete (Pandora Hearts-ED-2)";
+        string m3 = "Baton";
+        string m4 = "Minami-Ke Okaeri - Merry Christmas";
 
         public GameOfLife()
         {
@@ -279,11 +294,70 @@ namespace GOLStartUpTemplate
         private void Play_Click(object sender, EventArgs e)
         {
             timer.Enabled = true;
+            PlayerDialog player = new PlayerDialog();
+            player.Player = "Which song do you want to listen to? ";
+            player.Music = "Music 1";
+            if(DialogResult.OK == player.ShowDialog())
+            {
+
+            }
+            //if (s == 0)
+            //{
+            //List<string> musicList1 = new List<string>();
+            //musicList1.Add(m1);
+            //musicList1.Add(m3);
+            //    int i = musicList1.Count - 1;
+            //    while (i >= 0)
+            //    {
+            //        Console.WriteLine((i+1) + ") " + musicList1[i]);
+            //        i--;
+            //    }
+            //    int n = Int32.Parse(Console.ReadLine());
+            //    switch (n)
+            //    {
+            //        case 1:
+            //            music1.PlayLooping();
+            //            break;
+            //        case 2:
+            //            music3.PlayLooping();
+            //            break;
+
+            //        default:
+            //            break;
+            //    }
+            //}
+            //else
+            //{
+            //    List<string> musicList2 = new List<string>();
+            //    musicList2.Add(m2);
+            //    musicList2.Add(m4);
+            //    for (int i = 0; i < musicList2.Count; i++)
+            //    {
+            //        Console.WriteLine((i+1) + ") " + musicList2[i]);
+            //    }
+            //    int m = Int32.Parse(Console.ReadLine());
+            //    switch (m)
+            //    {
+            //        case 1:
+            //            music2.PlayLooping();
+            //            break;
+            //        case 2:
+            //            music4.PlayLooping();
+            //            break;
+
+            //        default:
+            //            break;
+            //    }
+            //}
         }
 
         private void Pause_Click(object sender, EventArgs e)
         {
             timer.Enabled = false;
+            music1.Stop();
+            music2.Stop();
+            music3.Stop();
+            music4.Stop();
         }
 
         private void Next_Click(object sender, EventArgs e)
@@ -475,8 +549,8 @@ namespace GOLStartUpTemplate
             if (DialogResult.OK == dlg.ShowDialog())
             {
                 graphicsPanel1.BackColor = dlg.Color;
-                graphicsPanel1.Invalidate();
             }
+                graphicsPanel1.Invalidate();
         }
 
         private void countColor_Click(object sender, EventArgs e)
@@ -528,6 +602,7 @@ namespace GOLStartUpTemplate
                     for (int x = 0; x < universe.GetLength(0); x++)
                     {
                         int n = rng.Next(0, 2);
+                        
                         if (n == 0)
                         {
                             universe[x, y] = true;
