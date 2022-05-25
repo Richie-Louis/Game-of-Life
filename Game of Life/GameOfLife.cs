@@ -291,16 +291,21 @@ namespace GOLStartUpTemplate
             this.Close();
         }
 
-        private void Play_Click(object sender, EventArgs e)
+        private void playsong()
         {
             PlayerDialog player = new PlayerDialog();
             player.Player = "Which song do you want to listen to? ";
             //player.Music = "Music 1";
             string[] musics13 = new string[] { m1, m2, m3, m4 };
             player.Music = musics13;
-            if(DialogResult.OK == player.ShowDialog())
+            if (DialogResult.OK == player.ShowDialog())
             {
             }
+        }
+
+        private void Play_Click(object sender, EventArgs e)
+        {
+            playsong();                        
             timer.Enabled = true;
             //if (s == 0)
             //{
@@ -359,6 +364,8 @@ namespace GOLStartUpTemplate
 
         private void Next_Click(object sender, EventArgs e)
         {
+            playsong();
+            timer.Enabled = false;
             NextGeneration();
         }
 
