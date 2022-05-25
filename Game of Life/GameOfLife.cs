@@ -293,62 +293,59 @@ namespace GOLStartUpTemplate
 
         private void Play_Click(object sender, EventArgs e)
         {
-            timer.Enabled = true;
             PlayerDialog player = new PlayerDialog();
             player.Player = "Which song do you want to listen to? ";
-            player.Music = "Music 1";
+            //player.Music = "Music 1";
+            string[] musics13 = new string[] { m1, m2, m3, m4 };
+            player.Music = musics13;
             if(DialogResult.OK == player.ShowDialog())
             {
-
             }
+            timer.Enabled = true;
             //if (s == 0)
             //{
-            //List<string> musicList1 = new List<string>();
-            //musicList1.Add(m1);
-            //musicList1.Add(m3);
-            //    int i = musicList1.Count - 1;
-            //    while (i >= 0)
+            //    //player.Music = m3;
+            //    int n = player.Choice;
+            //    if (DialogResult.OK == player.ShowDialog())
             //    {
-            //        Console.WriteLine((i+1) + ") " + musicList1[i]);
-            //        i--;
-            //    }
-            //    int n = Int32.Parse(Console.ReadLine());
-            //    switch (n)
-            //    {
-            //        case 1:
-            //            music1.PlayLooping();
-            //            break;
-            //        case 2:
-            //            music3.PlayLooping();
-            //            break;
+            //        switch (n)
+            //        {
+            //            case 1:
+            //                music1.PlayLooping();
+            //                break;
+            //            case 2:
+            //                music3.PlayLooping();
+            //                break;
 
-            //        default:
-            //            break;
+            //            default:
+            //                break;
+            //        }
             //    }
             //}
             //else
             //{
-            //    List<string> musicList2 = new List<string>();
-            //    musicList2.Add(m2);
-            //    musicList2.Add(m4);
-            //    for (int i = 0; i < musicList2.Count; i++)
+            //    //player.Music = m2;
+            //    //player.Music = m4;
+            //    int m = player.Choice;
+            //    if (DialogResult.OK == player.ShowDialog())
             //    {
-            //        Console.WriteLine((i+1) + ") " + musicList2[i]);
-            //    }
-            //    int m = Int32.Parse(Console.ReadLine());
-            //    switch (m)
-            //    {
-            //        case 1:
-            //            music2.PlayLooping();
-            //            break;
-            //        case 2:
-            //            music4.PlayLooping();
-            //            break;
 
-            //        default:
-            //            break;
+
+            //        switch (m)
+            //        {
+            //            case 1:
+            //                music2.PlayLooping();
+            //                break;
+            //            case 2:
+            //                music4.PlayLooping();
+            //                break;
+
+            //            default:
+            //                break;
+            //        }
             //    }
             //}
+
         }
 
         private void Pause_Click(object sender, EventArgs e)
@@ -550,7 +547,7 @@ namespace GOLStartUpTemplate
             {
                 graphicsPanel1.BackColor = dlg.Color;
             }
-                graphicsPanel1.Invalidate();
+            graphicsPanel1.Invalidate();
         }
 
         private void countColor_Click(object sender, EventArgs e)
@@ -588,7 +585,7 @@ namespace GOLStartUpTemplate
 
         private void fromSeedRandomize_Click(object sender, EventArgs e)
         {
-            FromSeedDialog dlg = new FromSeedDialog();      
+            FromSeedDialog dlg = new FromSeedDialog();
 
             // Seed
             dlg.Seed = seed;
@@ -602,7 +599,7 @@ namespace GOLStartUpTemplate
                     for (int x = 0; x < universe.GetLength(0); x++)
                     {
                         int n = rng.Next(0, 2);
-                        
+
                         if (n == 0)
                         {
                             universe[x, y] = true;
@@ -620,7 +617,7 @@ namespace GOLStartUpTemplate
 
         private void optionsSettings_Click(object sender, EventArgs e)
         {
-            
+
             OptionsSettingsDialog dlg = new OptionsSettingsDialog();
             if (maxWidth != 0)
             {

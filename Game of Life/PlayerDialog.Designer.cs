@@ -66,10 +66,11 @@ namespace GOLStartUpTemplate
             // listBox
             // 
             this.listBox.FormattingEnabled = true;
-            this.listBox.Location = new System.Drawing.Point(131, 97);
+            this.listBox.Location = new System.Drawing.Point(79, 56);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(120, 95);
+            this.listBox.Size = new System.Drawing.Size(381, 95);
             this.listBox.TabIndex = 4;
+            this.listBox.SelectedIndexChanged += new System.EventHandler(this.listBox_SelectedIndexChanged);
             // 
             // PlayerDialog
             // 
